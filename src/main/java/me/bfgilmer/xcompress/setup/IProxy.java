@@ -1,4 +1,4 @@
-package me.dinnerbeef.compressium.setup;
+package me.bfgilmer.xcompress.setup;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;

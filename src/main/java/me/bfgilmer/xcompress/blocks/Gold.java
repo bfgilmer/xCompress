@@ -1,4 +1,4 @@
-package me.dinnerbeef.compressium.blocks;
+package me.bfgilmer.xcompress.blocks;
 
 
 import net.minecraft.block.Block;
@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 
-public class Emerald extends Block {
+public class Gold extends Block {
 
-    public Emerald(Integer number) {
+    public Gold(Integer number) {
         super(Properties.create(Material.IRON)
                 .sound(SoundType.METAL)
                 .hardnessAndResistance(2.0f)
         );
-        setRegistryName("emerald_" + number);
+        setRegistryName("gold_" + number);
     }
     @Override
     public boolean isBeaconBase(BlockState state, IWorldReader world, BlockPos pos, BlockPos beacon) {

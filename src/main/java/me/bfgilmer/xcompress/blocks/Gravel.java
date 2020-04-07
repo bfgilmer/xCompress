@@ -1,21 +1,19 @@
-package me.dinnerbeef.compressium.blocks;
+package me.bfgilmer.xcompress.blocks;
 
 import net.minecraft.block.FallingBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.entity.item.FallingBlockEntity;
 
-public class Sand extends FallingBlock {
-    public Sand(Integer number) {
+public class Gravel extends FallingBlock {
+    public Gravel(Integer number) {
         super(Properties.create(Material.SAND)
-                .sound(SoundType.SAND)
+                .sound(SoundType.GROUND)
                 .hardnessAndResistance(2.0f));
-                setRegistryName("sand_" + number);
+        setRegistryName("gravel_" + number);
     }
     protected void onStartFalling(FallingBlockEntity fallingEntity) {
         fallingEntity.setHurtEntities(true);
     }
-    
 }

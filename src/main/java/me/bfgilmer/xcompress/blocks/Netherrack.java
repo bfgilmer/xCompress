@@ -1,4 +1,4 @@
-package me.dinnerbeef.compressium.blocks;
+package me.bfgilmer.xcompress.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

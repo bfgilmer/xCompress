@@ -14,9 +14,9 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
 def ENV = System.getenv()
-version = ENV.BUILD_NUMBER ? "${mod_version}.${ENV.BUILD_NUMBER}" : "${mod_version}.custom"
-group = 'me.dinnerbeef.compressium' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'Compressium'
+version = ENV.BUILD_NUMBER ? "${mod_version}.${ENV.BUILD_NUMBER}" : "${mod_version}.beta"
+group = 'me.bfgilmer.compressium' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'xCompress'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -117,12 +117,12 @@ dependencies {
 jar {
     manifest {
         attributes([
-            "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
+            "Specification-Title": "xCompress",
+            "Specification-Vendor": "bfgilmer",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
+            "Implementation-Vendor" :"bfgilmer",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
