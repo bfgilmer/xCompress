@@ -47,8 +47,6 @@ public class xCompress {
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientsetup);
-
-
     }
 
     private void clientsetup(final FMLClientSetupEvent event) {
