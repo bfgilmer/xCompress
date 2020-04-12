@@ -93,6 +93,19 @@ public class ModBlocks {
     @ObjectHolder("compressium:gravel_4")
     public static Block GRAVEL_4;
 
+ // dirt
+    @ObjectHolder("compressium:dirt_1")
+    public static Block DIRT_1;
+
+    @ObjectHolder("compressium:dirt_2")
+    public static Block DIRT_2;
+
+    @ObjectHolder("compressium:dirt_3")
+    public static Block DIRT_3;
+
+    @ObjectHolder("compressium:dirt_4")
+    public static Block DIRT_4;
+
 // Stone
     @ObjectHolder("compressium:stone_1")
     public static Block STONE_1;

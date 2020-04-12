@@ -75,6 +75,11 @@ public class Compressium {
         RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_3, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_4, RenderType.cutout());
 
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_1, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_2, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_3, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_4, RenderType.cutout());
+        
         RenderTypeLookup.setRenderLayer(ModBlocks.STONE_1, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.STONE_2, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.STONE_3, RenderType.cutout());
@@ -111,7 +116,7 @@ public class Compressium {
                 event.getRegistry().register(new Cobblestone(x));
                 event.getRegistry().register(new Sand(x));
                 event.getRegistry().register(new Gravel(x));
-//                event.getRegistry().register(new Dirt(x)); 
+                event.getRegistry().register(new Dirt(x)); 
 
                 // Nether
                 event.getRegistry().register(new Netherrack(x));
@@ -164,6 +169,11 @@ public class Compressium {
         event.getRegistry().register(new BlockItem(ModBlocks.GRAVEL_2, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("gravel_2"));
         event.getRegistry().register(new BlockItem(ModBlocks.GRAVEL_3, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("gravel_3"));
         event.getRegistry().register(new BlockItem(ModBlocks.GRAVEL_4, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("gravel_4"));
+
+        event.getRegistry().register(new BlockItem(ModBlocks.DIRT_1, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("dirt_1"));
+        event.getRegistry().register(new BlockItem(ModBlocks.DIRT_2, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("dirt_2"));
+        event.getRegistry().register(new BlockItem(ModBlocks.DIRT_3, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("dirt_3"));
+        event.getRegistry().register(new BlockItem(ModBlocks.DIRT_4, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("dirt_4"));
 
         event.getRegistry().register(new BlockItem(ModBlocks.STONE_1, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("stone_1"));
         event.getRegistry().register(new BlockItem(ModBlocks.STONE_2, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("stone_2"));
