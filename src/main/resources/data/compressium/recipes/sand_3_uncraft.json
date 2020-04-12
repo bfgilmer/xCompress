@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "compressium:sand_3"
+      "item": "compressium:sand_3" 
     }
   ],
   "result": {

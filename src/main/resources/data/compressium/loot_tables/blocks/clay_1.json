@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "blockMaking": "compressium:clay_1"
+          "name": "compressium:clay_1"
         }
       ],
       "conditions": [

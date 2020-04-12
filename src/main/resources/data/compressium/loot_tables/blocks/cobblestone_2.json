@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "compressium:cobble_2"
+          "name": "compressium:cobblestone_2"
         }
       ],
       "conditions": [

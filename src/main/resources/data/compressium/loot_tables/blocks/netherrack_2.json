@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "blockMaking": "compressium:netherrack_2"
+          "name": "compressium:netherrack_2"
         }
       ],
       "conditions": [

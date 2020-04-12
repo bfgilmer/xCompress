@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "blockMaking": "compressium:soul_3"
+          "name":"compressium:soulsand_3"
         }
       ],
       "conditions": [
