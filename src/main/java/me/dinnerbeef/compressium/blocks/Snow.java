@@ -8,7 +8,10 @@ import net.minecraft.block.material.Material;
 public class Snow extends Block {
     public Snow(Integer number) {
         super(Properties.create(Material.SNOW_BLOCK)
-                .sound(SoundType.SNOW).hardnessAndResistance(2.0f));
+                .sound(SoundType.SNOW)
+                .hardnessAndResistance(0.2f*number.floatValue(),(0.2f*number.floatValue()))
+                .slipperiness(0.6f*number.floatValue())
+                .speedFactor(number.floatValue()));
         setRegistryName("snow_" + number);
     }
 }

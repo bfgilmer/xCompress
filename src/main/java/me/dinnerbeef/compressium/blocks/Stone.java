@@ -8,7 +8,8 @@ public class Stone extends Block {
 
     public Stone(Integer number) {
         super(Properties.create(Material.ROCK)
-                .sound(SoundType.STONE).hardnessAndResistance(2.0f));
+                .sound(SoundType.STONE)
+                .hardnessAndResistance(6.0f,1.5f*number.floatValue()));
         setRegistryName("stone_" + number);
     }
 }

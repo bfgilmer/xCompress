@@ -13,7 +13,7 @@ public class Iron extends Block {
     public Iron(Integer number) {
         super(Properties.create(Material.IRON)
                 .sound(SoundType.METAL)
-                .hardnessAndResistance(2.0f)
+                .hardnessAndResistance(6.0f*number.floatValue(), (float)Math.pow(5.0f,number.doubleValue()))
         );
         setRegistryName("iron_" + number);
     }
