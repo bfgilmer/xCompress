@@ -100,6 +100,7 @@ dependencies {
     // Real examples
     // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
+    compile files('../Cucumber/build/libs/Cucumber-1.15.2-3.0.5-deobf.jar')
 
     // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
     // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
@@ -111,6 +112,20 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+}
+
+task deobfJar(type: Jar) {
+    classifier = 'deobf'
+    from sourceSets.main.output
+    manifest {
+        attributes(["Specification-Title": "Cucumber",
+                    "Specification-Vendor": "BlakeBr0",
+                    "Specification-Version": "1",
+                    "Implementation-Title": project.name,
+                    "Implementation-Version": "${version}",
+                    "Implementation-Vendor" :"BlakeBr0",
+                    "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")],)
+    }
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

@@ -2,6 +2,7 @@ package me.dinnerbeef.compressium;
 
 
 import me.dinnerbeef.compressium.blocks.*;
+import me.dinnerbeef.compressium.item.ModItems;
 import me.dinnerbeef.compressium.setup.ClientProxy;
 import me.dinnerbeef.compressium.setup.IProxy;
 import me.dinnerbeef.compressium.setup.ServerProxy;
@@ -38,8 +39,7 @@ public class Compressium {
     }
     
 
-    private void clientsetup(final FMLClientSetupEvent event) {
-    	
+    private void clientsetup(final FMLClientSetupEvent event) {   	
         RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_1, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_2, RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_3, RenderType.cutout());
@@ -134,6 +134,7 @@ public class Compressium {
 
     @SubscribeEvent
     public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
+    	event.getRegistry().register(new Item(new Item.Properties().group(Compressium.creativeTab)).setRegistryName("compressor"));
     	
         event.getRegistry().register(new BlockItem(ModBlocks.COBBLESTONE_1, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("cobblestone_1"));
         event.getRegistry().register(new BlockItem(ModBlocks.COBBLESTONE_2, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("cobblestone_2"));

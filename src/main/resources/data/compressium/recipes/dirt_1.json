@@ -2,12 +2,15 @@
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "xxx",
-    "xxx",
+    "xcx",
     "xxx"
   ],
   "key": {
     "x": {
       "item": "minecraft:dirt"
+    },
+    "c": {
+      "item": "compressium:compressor"
     }
   },
   "result": {
