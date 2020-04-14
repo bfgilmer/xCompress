@@ -2,7 +2,9 @@ package me.dinnerbeef.compressium;
 
 
 import me.dinnerbeef.compressium.blocks.*;
+import me.dinnerbeef.compressium.item.CompressorItem;
 import me.dinnerbeef.compressium.item.ModItems;
+import me.dinnerbeef.compressium.item.ReusableItem;
 import me.dinnerbeef.compressium.setup.ClientProxy;
 import me.dinnerbeef.compressium.setup.IProxy;
 import me.dinnerbeef.compressium.setup.ServerProxy;
@@ -16,12 +18,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+import static com.blakebr0.mysticalagriculture.MysticalAgriculture.ITEM_GROUP;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.blakebr0.mysticalagriculture.item.MasterInfusionCrystalItem;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("compressium")
@@ -134,8 +142,9 @@ public class Compressium {
 
     @SubscribeEvent
     public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
-    	event.getRegistry().register(new Item(new Item.Properties().group(Compressium.creativeTab)).setRegistryName("compressor"));
-    	
+    	//event.getRegistry().register(new CompressorItem(new Item.Properties().group(Compressium.creativeTab)).setRegistryName("compressor"));
+    	event.getRegistry().register(new CompressorItem(p -> p.group(Compressium.creativeTab)));
+        
         event.getRegistry().register(new BlockItem(ModBlocks.COBBLESTONE_1, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("cobblestone_1"));
         event.getRegistry().register(new BlockItem(ModBlocks.COBBLESTONE_2, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("cobblestone_2"));
         event.getRegistry().register(new BlockItem(ModBlocks.COBBLESTONE_3, new Item.Properties().group(Compressium.creativeTab)).setRegistryName("cobblestone_3"));

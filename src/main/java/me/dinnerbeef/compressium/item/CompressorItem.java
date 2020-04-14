@@ -4,11 +4,16 @@ import java.util.function.Function;
 
 import com.blakebr0.cucumber.item.ReusableItem;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item.Properties;
+
 public class CompressorItem extends ReusableItem {
+    public CompressorItem(Function<Properties, Properties> properties) {
+        super(properties);
+    }
 
-	public CompressorItem(Properties properties) {
-		super((Function<Properties, Properties>) properties);
-		// TODO Auto-generated constructor stub
-	}
-
+    @Override
+    public boolean hasEffect(ItemStack stack) {
+        return true;
+    }
 }
