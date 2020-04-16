@@ -1,14 +1,16 @@
-
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
     "xxx",
-    "xxx",
+    "xcx",
     "xxx"
   ],
   "key": {
     "x": {
       "item": "compressium:cobblestone_3"
+    },
+    "c": {
+      "item": "compressium:compressor"
     }
   },
   "result": {

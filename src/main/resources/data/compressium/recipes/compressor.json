@@ -2,15 +2,18 @@
     "type": "minecraft:crafting_shaped",
     "pattern": [
         "#S#",
-        "S S",
+        "SwS",
         "#S#"
     ],
     "key": {
         "#": {
-            "item": "minecraft:oak_stairs"
+            "item": "minecraft:cobblestone"
         },
         "S": {
-            "item": "minecraft:string"
+            "item": "minecraft:stick"
+        },
+        "w": {   
+            "item":"minecraft:lever"
         }
     },
     "result": {
