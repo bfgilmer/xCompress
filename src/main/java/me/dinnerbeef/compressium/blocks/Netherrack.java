@@ -1,6 +1,8 @@
 package me.dinnerbeef.compressium.blocks;
 
-import net.minecraft.block.Block;
+
+import com.blakebr0.cucumber.block.BaseBlock;
+
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -9,11 +11,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
 
-public class Netherrack extends Block {
+public class Netherrack extends BaseBlock {
     public Netherrack(Integer number) {
-        super(Properties.create(Material.ROCK)
-                .sound(SoundType.STONE).hardnessAndResistance(0.4f*number.floatValue(),0.4f*number.floatValue()));
-        setRegistryName("netherrack_"+ number);
+        super(Material.ROCK, p -> p.sound(SoundType.STONE).hardnessAndResistance(0.4f*number.floatValue(),0.4f*number.floatValue()));
     }
     
     @Override

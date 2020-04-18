@@ -5,15 +5,10 @@ import me.dinnerbeef.compressium.item.ModItems;
 import me.dinnerbeef.compressium.setup.ClientProxy;
 import me.dinnerbeef.compressium.setup.IProxy;
 import me.dinnerbeef.compressium.setup.ServerProxy;
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -47,140 +42,63 @@ public class Compressium {
     
 
     private void clientsetup(final FMLClientSetupEvent event) {   	
-        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_1, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_2, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_3, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_4, RenderType.cutout());
+        ModBlocks.BLOCK_ENTRIES.forEach(block -> {
+            RenderTypeLookup.setRenderLayer(block.get(), RenderType.cutout());
+        });
+/*
+        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_4.get(), RenderType.cutout());
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_1, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_2, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_3, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_4, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_4.get(), RenderType.cutout());
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_1, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_2, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_3, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_4, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_4.get(), RenderType.cutout());
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_1, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_2, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_3, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_4, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_4.get(), RenderType.cutout());
         
-        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_1, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_2, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_3, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_4, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_4.get(), RenderType.cutout());
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_1, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_2, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_3, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_4, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_4.get(), RenderType.cutout());
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_1, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_2, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_3, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_4, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_4.get(), RenderType.cutout());
 
-        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_1, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_2, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_3, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_4, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_4.get(), RenderType.cutout());
         
-        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_1, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_2, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_3, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_4, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_4.get(), RenderType.cutout());
         
-        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_1, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_2, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_3, RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_4, RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_4.get(), RenderType.cutout());
+*/        
+        
     }
 
     private void setup(final FMLCommonSetupEvent event) {
-    
     }
-
-
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-            for(int x = 1; x < 5; x++) {
-            	// Primary drops that clog inventory
-                event.getRegistry().register(new Cobblestone(x));
-                event.getRegistry().register(new Sand(x));
-                event.getRegistry().register(new Gravel(x));
-                event.getRegistry().register(new Dirt(x)); 
-
-                // Nether
-                event.getRegistry().register(new Netherrack(x));
-                event.getRegistry().register(new Soulsand(x));
-                
-                // result of smelting 
-                event.getRegistry().register(new Stone(x));
-
-                event.getRegistry().register(new Snow(x));
-                event.getRegistry().register(new Clay(x));
-                event.getRegistry().register(new Iron(x));
-            }
-        }
-
-    @SubscribeEvent
-    public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {        
-        event.getRegistry().register(new BlockItem(ModBlocks.COBBLESTONE_1, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("cobblestone_1"));
-        event.getRegistry().register(new BlockItem(ModBlocks.COBBLESTONE_2, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("cobblestone_2"));
-        event.getRegistry().register(new BlockItem(ModBlocks.COBBLESTONE_3, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("cobblestone_3"));
-        event.getRegistry().register(new BlockItem(ModBlocks.COBBLESTONE_4, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("cobblestone_4"));
-        
-        event.getRegistry().register(new BlockItem(ModBlocks.NETHERRACK_1, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("netherrack_1"));
-        event.getRegistry().register(new BlockItem(ModBlocks.NETHERRACK_2, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("netherrack_2"));
-        event.getRegistry().register(new BlockItem(ModBlocks.NETHERRACK_3, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("netherrack_3"));
-        event.getRegistry().register(new BlockItem(ModBlocks.NETHERRACK_4, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("netherrack_4"));
-
-        event.getRegistry().register(new BlockItem(ModBlocks.SAND_1, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("sand_1"));
-        event.getRegistry().register(new BlockItem(ModBlocks.SAND_2, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("sand_2"));
-        event.getRegistry().register(new BlockItem(ModBlocks.SAND_3, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("sand_3"));
-        event.getRegistry().register(new BlockItem(ModBlocks.SAND_4, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("sand_4"));
-
-        event.getRegistry().register(new BlockItem(ModBlocks.SOULSAND_1, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("soulsand_1"));
-        event.getRegistry().register(new BlockItem(ModBlocks.SOULSAND_2, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("soulsand_2"));
-        event.getRegistry().register(new BlockItem(ModBlocks.SOULSAND_3, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("soulsand_3"));
-        event.getRegistry().register(new BlockItem(ModBlocks.SOULSAND_4, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("soulsand_4"));
-
-        event.getRegistry().register(new BlockItem(ModBlocks.SNOW_1, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("snow_1"));
-        event.getRegistry().register(new BlockItem(ModBlocks.SNOW_2, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("snow_2"));
-        event.getRegistry().register(new BlockItem(ModBlocks.SNOW_3, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("snow_3"));
-        event.getRegistry().register(new BlockItem(ModBlocks.SNOW_4, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("snow_4"));
-
-        event.getRegistry().register(new BlockItem(ModBlocks.CLAY_1, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("clay_1"));
-        event.getRegistry().register(new BlockItem(ModBlocks.CLAY_2, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("clay_2"));
-        event.getRegistry().register(new BlockItem(ModBlocks.CLAY_3, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("clay_3"));
-        event.getRegistry().register(new BlockItem(ModBlocks.CLAY_4, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("clay_4"));
-
-        event.getRegistry().register(new BlockItem(ModBlocks.GRAVEL_1, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("gravel_1"));
-        event.getRegistry().register(new BlockItem(ModBlocks.GRAVEL_2, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("gravel_2"));
-        event.getRegistry().register(new BlockItem(ModBlocks.GRAVEL_3, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("gravel_3"));
-        event.getRegistry().register(new BlockItem(ModBlocks.GRAVEL_4, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("gravel_4"));
-
-        event.getRegistry().register(new BlockItem(ModBlocks.DIRT_1, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("dirt_1"));
-        event.getRegistry().register(new BlockItem(ModBlocks.DIRT_2, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("dirt_2"));
-        event.getRegistry().register(new BlockItem(ModBlocks.DIRT_3, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("dirt_3"));
-        event.getRegistry().register(new BlockItem(ModBlocks.DIRT_4, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("dirt_4"));
-
-        event.getRegistry().register(new BlockItem(ModBlocks.STONE_1, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("stone_1"));
-        event.getRegistry().register(new BlockItem(ModBlocks.STONE_2, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("stone_2"));
-        event.getRegistry().register(new BlockItem(ModBlocks.STONE_3, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("stone_3"));
-        event.getRegistry().register(new BlockItem(ModBlocks.STONE_4, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("stone_4"));
-
-        event.getRegistry().register(new BlockItem(ModBlocks.IRON_1, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("iron_1"));
-        event.getRegistry().register(new BlockItem(ModBlocks.IRON_2, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("iron_2"));
-        event.getRegistry().register(new BlockItem(ModBlocks.IRON_3, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("iron_3"));
-        event.getRegistry().register(new BlockItem(ModBlocks.IRON_4, new Item.Properties().group(Compressium.ITEM_GROUP)).setRegistryName("iron_4"));
-        }
-    }
-
 }

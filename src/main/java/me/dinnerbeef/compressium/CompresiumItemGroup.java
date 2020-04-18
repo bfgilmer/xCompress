@@ -20,7 +20,7 @@ public class CompresiumItemGroup extends ItemGroup {
 
 	@Override
 	public ItemStack createIcon() {
-		return new ItemStack(ModBlocks.COBBLESTONE_1);
+		return new ItemStack(ModBlocks.COBBLESTONE_1.get());
 	}
 
 }

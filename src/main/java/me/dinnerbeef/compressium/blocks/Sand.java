@@ -10,7 +10,6 @@ public class Sand extends FallingBlock {
         super(Properties.create(Material.SAND)
                 .sound(SoundType.SAND)
                 .hardnessAndResistance(0.5f*number.floatValue(), 0.5f*(float)Math.pow(2.0f, number.doubleValue())));
-                setRegistryName("sand_" + number);
     }
     
     protected void onStartFalling(FallingBlockEntity fallingEntity) {

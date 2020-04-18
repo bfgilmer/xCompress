@@ -10,7 +10,6 @@ public class Gravel extends FallingBlock {
         super(Properties.create(Material.SAND)
                 .sound(SoundType.GROUND)
                 .hardnessAndResistance(0.6f*number.floatValue(), 0.6f*(float)Math.pow(2.0f, number.doubleValue())));
-        setRegistryName("gravel_" + number);
     }
     
     protected void onStartFalling(FallingBlockEntity fallingEntity) {

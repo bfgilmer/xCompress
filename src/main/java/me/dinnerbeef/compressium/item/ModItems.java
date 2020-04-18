@@ -17,13 +17,15 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModItems {
-    public static final List<Supplier<? extends Item>> ENTRIES = new ArrayList<>();
+    public static final List<Supplier<? extends Item>> BLOCK_ENTRIES = new ArrayList<>();
+    public static final List<Supplier<? extends Item>> ITEM_ENTRIES = new ArrayList<>();
 	
     @SubscribeEvent
     public void onRegisterItems(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> registry = event.getRegistry();
-
-        ENTRIES.stream().map(Supplier::get).forEach(registry::register);
+        
+        BLOCK_ENTRIES.stream().map(Supplier::get).forEach(registry::register);
+        ITEM_ENTRIES.stream().map(Supplier::get).forEach(registry::register);
     }
 
     private static <T extends Item> RegistryObject<T> register(String name) {
@@ -32,12 +34,12 @@ public class ModItems {
 
     private static <T extends Item> RegistryObject<T> register(String name, Supplier<? extends Item> item) {
         ResourceLocation loc = new ResourceLocation(Compressium.MOD_ID, name);
-        ENTRIES.add(() -> item.get().setRegistryName(loc));
+        ITEM_ENTRIES.add(() -> item.get().setRegistryName(loc));
+        
         return RegistryObject.of(loc, ForgeRegistries.ITEMS);
     }
     
 //    @ObjectHolder("compressium:compressor")
 //    public static Item COMPRESSOR;
-
     public static final RegistryObject<CompressorItem> COMPRESSOR = register("compressor", () -> new CompressorItem(p -> p.group(Compressium.ITEM_GROUP)));
 }
