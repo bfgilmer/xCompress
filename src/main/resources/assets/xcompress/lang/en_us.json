@@ -1,0 +1,53 @@
+{
+  "itemGroup.xcompress.xcompress": "Compressium",
+
+  "block.xcompress.soulsand_1": "Compressed Soul Sand (9)",
+  "block.xcompress.soulsand_2": "Double-Compressed Soul Sand (81)",
+  "block.xcompress.soulsand_3": "Triple-Compressed Soul Sand (729)",
+  "block.xcompress.soulsand_4": "Quad-Compressed Soul Sand (6561)",
+
+  "block.xcompress.netherrack_1": "Compressed Netherrack (9)",
+  "block.xcompress.netherrack_2": "Double-Compressed Netherrack (81)",
+  "block.xcompress.netherrack_3": "Triple-Compressed Netherrack (729)",
+  "block.xcompress.netherrack_4": "Quad-Compressed Netherrack (6561)",
+
+  "block.xcompress.snow_1": "Compressed Snow Block (9)",
+  "block.xcompress.snow_2": "Double-Compressed Snow Block (81)",
+  "block.xcompress.snow_3": "Triple-Compressed Snow Block (729)",
+  "block.xcompress.snow_4": "Quad-Compressed Snow Block (6561)",
+
+  "block.xcompress.clay_1": "Compressed Clay (9)",
+  "block.xcompress.clay_2": "Double-Compressed Clay (81)",
+  "block.xcompress.clay_3": "Triple-Compressed Clay (729)",
+  "block.xcompress.clay_4": "Quad-Compressed Clay (6561)",
+
+  "block.xcompress.cobblestone_1": "Compressed Cobble (9)",
+  "block.xcompress.cobblestone_2": "Double-Compressed Cobble (81)",
+  "block.xcompress.cobblestone_3": "Triple-Compressed Cobble (729)",
+  "block.xcompress.cobblestone_4": "Quad-Compressed Cobble (6561)",
+  
+  "block.xcompress.dirt_1": "Compressed Dirt (9)",
+  "block.xcompress.dirt_2": "Double-Compressed Dirt (81)",
+  "block.xcompress.dirt_3": "Triple-Compressed Dirt (729)",
+  "block.xcompress.dirt_4": "Quad-Compressed Dirt (6561)",
+
+  "block.xcompress.sand_1": "Compressed Sand (9)",
+  "block.xcompress.sand_2": "Double-Compressed Sand (81)",
+  "block.xcompress.sand_3": "Triple-Compressed Sand (729)",
+  "block.xcompress.sand_4": "Quad-Compressed Sand (6561)",
+
+  "block.xcompress.gravel_1": "Compressed Gravel (9)",
+  "block.xcompress.gravel_2": "Double-Compressed Gravel (81)",
+  "block.xcompress.gravel_3": "Triple-Compressed Gravel (729)",
+  "block.xcompress.gravel_4": "Quad-Compressed Gravel (6561)",
+
+  "block.xcompress.stone_1": "Compressed Stone (9)",
+  "block.xcompress.stone_2": "Double-Compressed Stone (81)",
+  "block.xcompress.stone_3": "Triple-Compressed Stone (729)",
+  "block.xcompress.stone_4": "Quad-Compressed Stone (6561)",
+
+  "block.xcompress.iron_1": "Compressed Block Of Iron (9)",
+  "block.xcompress.iron_2": "Double-Compressed Block Of Iron (81)",
+  "block.xcompress.iron_3": "Triple-Compressed Block Of Iron (729)",
+  "block.xcompress.iron_4": "Quad-Compressed Block Of Iron (6561)"
+}

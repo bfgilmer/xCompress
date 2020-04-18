@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "xcompress:cobblestone_3"
+  },
+  "result": "xcompress:stone_3",
+  "experience": 3,
+  "cookingtime": 500
+}

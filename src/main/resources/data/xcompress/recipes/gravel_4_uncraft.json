@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "xcompress:gravel_4"
+    }
+  ],
+  "result": {
+    "item": "xcompress:gravel_3",
+    "count": 8
+  }
+}
