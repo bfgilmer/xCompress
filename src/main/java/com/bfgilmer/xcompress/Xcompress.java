@@ -20,14 +20,14 @@ import com.bfgilmer.xcompress.setup.ServerProxy;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("xcompress")
-public class Compressium {
+public class Xcompress {
     public static final String MOD_ID = "xcompress";
-	public static final ItemGroup ITEM_GROUP = new CompresiumItemGroup(Compressium.MOD_ID);
+	public static final ItemGroup ITEM_GROUP = new XcompresItemGroup(Xcompress.MOD_ID);
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static IProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
-    public Compressium() {       
+    public Xcompress() {       
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		
         // Register the setup method for modloading

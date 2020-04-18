@@ -9,9 +9,9 @@ import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorldReader;
 
-public class Iron extends BaseBlock {
+public class IronBlock extends BaseBlock {
 
-    public Iron(Integer number) {
+    public IronBlock(Integer number) {
         super(Material.IRON, SoundType.METAL, 6.0f*number.floatValue(), (float)Math.pow(5.0f,number.doubleValue()));
     }
     

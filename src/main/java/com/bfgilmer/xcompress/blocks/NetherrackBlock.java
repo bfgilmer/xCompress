@@ -11,8 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
 
-public class Netherrack extends BaseBlock {
-    public Netherrack(Integer number) {
+public class NetherrackBlock extends BaseBlock {
+    public NetherrackBlock(Integer number) {
         super(Material.ROCK, p -> p.sound(SoundType.STONE).hardnessAndResistance(0.4f*number.floatValue(),0.4f*number.floatValue()));
     }
     

@@ -5,17 +5,17 @@ import com.bfgilmer.xcompress.blocks.ModBlocks;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
-public class CompresiumItemGroup extends ItemGroup {
+public class XcompresItemGroup extends ItemGroup {
 
-	public CompresiumItemGroup() {
-		this(Compressium.MOD_ID);	
+	public XcompresItemGroup() {
+		this(Xcompress.MOD_ID);	
 	}
 	
-	public CompresiumItemGroup(String label) {
+	public XcompresItemGroup(String label) {
 		super(label);
 	}
 
-	public CompresiumItemGroup(int index, String label) {
+	public XcompresItemGroup(int index, String label) {
 		super(index, label);
 	}
 

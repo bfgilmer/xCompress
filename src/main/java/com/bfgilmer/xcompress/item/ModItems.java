@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import com.bfgilmer.xcompress.Compressium;
+import com.bfgilmer.xcompress.Xcompress;
 import com.blakebr0.cucumber.item.BaseItem;
 
 import net.minecraft.item.Item;
@@ -30,11 +30,11 @@ public class ModItems {
     }
 
     private static <T extends Item> RegistryObject<T> register(String name) {
-        return register(name, () -> new BaseItem(p -> p.group(Compressium.ITEM_GROUP)));
+        return register(name, () -> new BaseItem(p -> p.group(Xcompress.ITEM_GROUP)));
     }
 
     private static <T extends Item> RegistryObject<T> register(String name, Supplier<? extends Item> item) {
-        ResourceLocation loc = new ResourceLocation(Compressium.MOD_ID, name);
+        ResourceLocation loc = new ResourceLocation(Xcompress.MOD_ID, name);
         ITEM_ENTRIES.add(() -> item.get().setRegistryName(loc));
         
         return RegistryObject.of(loc, ForgeRegistries.ITEMS);
@@ -42,5 +42,5 @@ public class ModItems {
     
 //    @ObjectHolder("compressium:compressor")
 //    public static Item COMPRESSOR;
-    public static final RegistryObject<CompressorItem> COMPRESSOR = register("compressor", () -> new CompressorItem(p -> p.group(Compressium.ITEM_GROUP)));
+    public static final RegistryObject<CompressorItem> COMPRESSOR = register("compressor", () -> new CompressorItem(p -> p.group(Xcompress.ITEM_GROUP)));
 }
