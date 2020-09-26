@@ -30,19 +30,70 @@ public class Xcompress {
     public Xcompress() {       
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		
-        // Register the setup method for modloading
-        bus.addListener(this::setup);
-        bus.addListener(this::clientsetup);
-
 		bus.register(this);
 		bus.register(new ModBlocks());
 		bus.register(new ModItems());
+		
+        // Register the setup method for modloading
+        bus.addListener(this::setup);
+        bus.addListener(this::clientsetup);
     }
     
-    private void clientsetup(final FMLClientSetupEvent event) {   	
-        ModBlocks.BLOCK_ENTRIES.forEach(block -> {
-            RenderTypeLookup.setRenderLayer(block.get(), RenderType.cutout());
-        });
+    private void clientsetup(final FMLClientSetupEvent event) {   	       
+        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_4.get(), RenderType.cutout());
+        
+        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.COBBLESTONE_4.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.GRAVEL_4.get(), RenderType.cutout());
+
+        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.IRON_4.get(), RenderType.cutout());
+        
+        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.NETHERRACK_4.get(), RenderType.cutout());
+        
+        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SNOW_4.get(), RenderType.cutout());
+        
+        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.STONE_4.get(), RenderType.cutout());
+        
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SAND_4.get(), RenderType.cutout());
+        
+        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.CLAY_4.get(), RenderType.cutout());
+        
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_4.get(), RenderType.cutout());
+        
+        RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_4.get(), RenderType.cutout()); 
     }
 
     private void setup(final FMLCommonSetupEvent event) {

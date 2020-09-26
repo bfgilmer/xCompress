@@ -1,3 +1,4 @@
+
 {
   "type": "minecraft:block",
   "pools": [
@@ -6,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "xcompress:stone_1"
+          "name": "xcompress:stone_2"
         }
       ],
       "conditions": [

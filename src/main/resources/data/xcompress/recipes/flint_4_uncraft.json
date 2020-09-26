@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "xcompress:flint_4" 
+    }
+  ],
+  "result": {
+    "item": "xcompress:flint_3",
+    "count": 8
+  }
+}

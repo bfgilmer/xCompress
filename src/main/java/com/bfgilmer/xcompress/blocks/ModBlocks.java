@@ -82,7 +82,13 @@ public class ModBlocks {
     public static final RegistryObject<BaseBlock> IRON_2 = register("iron_2", () -> new IronBlock(2));
     public static final RegistryObject<BaseBlock> IRON_3 = register("iron_3", () -> new IronBlock(3));
     public static final RegistryObject<BaseBlock> IRON_4 = register("iron_4", () -> new IronBlock(4));
-    
+
+    // Flint
+    public static final RegistryObject<BaseBlock> FLINT_1 = register("flint_1", () -> new FlintBlock(1));
+    public static final RegistryObject<BaseBlock> FLINT_2 = register("flint_2", () -> new FlintBlock(2));
+    public static final RegistryObject<BaseBlock> FLINT_3 = register("flint_3", () -> new FlintBlock(3));
+    public static final RegistryObject<BaseBlock> FLINT_4 = register("flint_4", () -> new FlintBlock(4));
+
     @SubscribeEvent
     public void onRegisterBlocks(RegistryEvent.Register<Block> event) {
         IForgeRegistry<Block> registry = event.getRegistry();
