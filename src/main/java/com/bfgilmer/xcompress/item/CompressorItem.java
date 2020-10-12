@@ -5,7 +5,7 @@ import java.util.function.Function;
 import com.blakebr0.cucumber.item.ReusableItem;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Item.Properties;
+
 
 public class CompressorItem extends ReusableItem {
     public CompressorItem(Function<Properties, Properties> properties) {

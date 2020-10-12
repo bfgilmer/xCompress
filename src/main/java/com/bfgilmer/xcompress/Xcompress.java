@@ -17,6 +17,7 @@ import com.bfgilmer.xcompress.item.ModItems;
 import com.bfgilmer.xcompress.setup.ClientProxy;
 import com.bfgilmer.xcompress.setup.IProxy;
 import com.bfgilmer.xcompress.setup.ServerProxy;
+import com.bfgilmer.xcompress.tileentity.ModTileEntities;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("xcompress")
@@ -33,6 +34,7 @@ public class Xcompress {
 		bus.register(this);
 		bus.register(new ModBlocks());
 		bus.register(new ModItems());
+    	bus.register(new ModTileEntities());
 		
         // Register the setup method for modloading
         bus.addListener(this::setup);
