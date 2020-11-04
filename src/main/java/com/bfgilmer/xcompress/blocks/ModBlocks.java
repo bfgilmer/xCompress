@@ -89,6 +89,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> FLINT_2 = register("flint_2", () -> new FlintBlock(2));
     public static final RegistryObject<Block> FLINT_3 = register("flint_3", () -> new FlintBlock(3));
     public static final RegistryObject<Block> FLINT_4 = register("flint_4", () -> new FlintBlock(4));
+    
+    // Slime
+    public static final RegistryObject<Block> SLIME_1 = register("slime_1", () -> new SlimeBlock(1));
+    public static final RegistryObject<Block> SLIME_2 = register("slime_2", () -> new SlimeBlock(2));
+    public static final RegistryObject<Block> SLIME_3 = register("slime_3", () -> new SlimeBlock(3));
+    public static final RegistryObject<Block> SLIME_4 = register("slime_4", () -> new SlimeBlock(4));
 
     @SubscribeEvent
     public void onRegisterBlocks(RegistryEvent.Register<Block> event) {

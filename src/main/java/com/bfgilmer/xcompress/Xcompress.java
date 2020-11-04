@@ -95,7 +95,13 @@ public class Xcompress {
         RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_1.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_2.get(), RenderType.cutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_3.get(), RenderType.cutout());
-        RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_4.get(), RenderType.cutout()); 
+        RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_4.get(), RenderType.cutout());
+        
+        RenderTypeLookup.setRenderLayer(ModBlocks.SLIME_1.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SLIME_2.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SLIME_3.get(), RenderType.cutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.SLIME_4.get(), RenderType.cutout()); 
+
     }
 
     private void setup(final FMLCommonSetupEvent event) {

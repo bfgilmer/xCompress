@@ -33,6 +33,7 @@ import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+
 import net.minecraft.util.math.shapes.IBooleanFunction;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
@@ -54,11 +55,12 @@ import net.minecraft.world.World;
 			 super(ModTileEntities.FLINT.get());
 		   }
 		   
-		   public void setCollectionSize(double size) {
-			   double rside=1.0D - size;
-			   VoxelShape above = Block.makeCuboidShape(rside*16.0D, 16.0D, rside*16.0D, size*16.0D, 32.0D, size*16.0D);
-			   
-			   COLLECTION_AREA_SHAPE = VoxelShapes.or(INSIDE_BOWL_SHAPE, above);
+		   public void setCollectionSize(int size) {
+			   if (size > 1) {
+				   VoxelShape above = Block.makeCuboidShape((size-1)*-16.0D, 16.0D, (size-1)*-16.0D, size*16.0D, 32.0D, size*16.0D);			   
+//				   COLLECTION_AREA_SHAPE = VoxelShapes.or(INSIDE_BOWL_SHAPE, above);
+				   COLLECTION_AREA_SHAPE = above;
+			   }
 		   }
 		   
 		   public void read(CompoundNBT compound) {
