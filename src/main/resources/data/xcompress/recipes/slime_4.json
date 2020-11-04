@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xxx",
+    "xcx",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "xcompress:slime_3"
+    },
+    "c": {
+      "item": "xcompress:compressor"
+    }
+  },
+  "result": {
+    "item": "xcompress:slime_4"
+  }
+}
