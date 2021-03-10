@@ -2,12 +2,12 @@ package com.bfgilmer.xcompress.item;
 
 import java.util.function.Function;
 
-import com.blakebr0.cucumber.item.ReusableItem;
+import com.blakebr0.cucumber.item.BaseReusableItem;
 
 import net.minecraft.item.ItemStack;
 
 
-public class CompressorItem extends ReusableItem {
+public class CompressorItem extends BaseReusableItem {
     public CompressorItem(Function<Properties, Properties> properties) {
         super(properties);
     }

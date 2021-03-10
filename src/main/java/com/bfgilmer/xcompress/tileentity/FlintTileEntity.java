@@ -64,7 +64,7 @@ import net.minecraft.world.World;
 		   }
 		   
 		   public void read(CompoundNBT compound) {
-		      super.read(compound);
+		      //super.read(compound);
 		      this.inventory = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
 		      if (!this.checkLootAndRead(compound)) {
 		         ItemStackHelper.loadAllItems(compound, this.inventory);
@@ -402,7 +402,7 @@ import net.minecraft.world.World;
 		         if (tileentity instanceof IInventory) {
 		            iinventory = (IInventory)tileentity;
 		            if (iinventory instanceof ChestTileEntity && block instanceof ChestBlock) {
-		               iinventory = ChestBlock.func_226916_a_((ChestBlock)block, blockstate, worldIn, blockpos, true);
+		               iinventory = ChestBlock.getChestInventory((ChestBlock)block, blockstate, worldIn, blockpos, true);
 		            }
 		         }
 		      }

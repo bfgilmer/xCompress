@@ -15,10 +15,6 @@ public class IronBlock extends BaseBlock {
         super(Material.IRON, SoundType.METAL, 6.0f*number.floatValue(), (float)Math.pow(5.0f,number.doubleValue()));
     }
     
-    @Override
-    public boolean isBeaconBase(BlockState state, IWorldReader world, BlockPos pos, BlockPos beacon) {
-        return true;
-    }
-}
+ }
 
 

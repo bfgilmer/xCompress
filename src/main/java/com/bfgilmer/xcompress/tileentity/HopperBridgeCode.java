@@ -1,6 +1,7 @@
 package com.bfgilmer.xcompress.tileentity;
 
 import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.HopperBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.TileEntity;
@@ -18,6 +19,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.bfgilmer.xcompress.blocks.FlintHopperBlock;
+
+import java.util.Optional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -243,7 +246,7 @@ public class HopperBridgeCode
             if (tileentity != null)
             {
                 return tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side)
-                    .map(capability -> ImmutablePair.<IItemHandler, Object>of(capability, tileentity));
+                    .lazyMap(capability -> ImmutablePair.<IItemHandler, Object>of(capability, tileentity));
             }
         }
 

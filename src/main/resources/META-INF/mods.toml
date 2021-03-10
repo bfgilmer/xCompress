@@ -2,10 +2,12 @@
 modLoader="javafml" #mandatory
 
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[28,)" #mandatory (28 is current forge version)
+loaderVersion="[35,)" #mandatory (35 is current forge version)
+
+license="All rights reserved"
 
 # A URL to refer people to when problems occur with this mod
-#issueTrackerURL="https://github.com/DinnerBeef/xcompress" 
+#issueTrackerURL="https://github.com/bfgilmer/xcompress" 
 
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
