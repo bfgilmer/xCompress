@@ -1,255 +1,218 @@
 package com.bfgilmer.xcompress.tileentity;
 
-import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.HopperBlock;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.IHopper;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.DispenserTileEntity;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemHandlerHelper;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
-import org.apache.commons.lang3.tuple.Pair;
-
-import com.bfgilmer.xcompress.blocks.FlintHopperBlock;
-
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class HopperBridgeCode
-{
-    /**
-     * Copied from TileEntityHopper#captureDroppedItems and added capability support
-     * @return Null if we did nothing {no IItemHandler}, True if we moved an item, False if we moved no items
-     */
-    @Nullable
-    public static Boolean extractHook(IHopper dest)
-    {
-        return getItemHandler(dest, Direction.UP)
-                .map(itemHandlerResult -> {
-                    IItemHandler handler = itemHandlerResult.getKey();
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 
-                    for (int i = 0; i < handler.getSlots(); i++)
-                    {
-                        ItemStack extractItem = handler.extractItem(i, 1, true);
-                        if (!extractItem.isEmpty())
-                        {
-                            for (int j = 0; j < dest.getSizeInventory(); j++)
-                            {
-                                ItemStack destStack = dest.getStackInSlot(j);
-                                if (dest.isItemValidForSlot(j, extractItem) && (destStack.isEmpty() || destStack.getCount() < destStack.getMaxStackSize() && destStack.getCount() < dest.getInventoryStackLimit() && ItemHandlerHelper.canItemStacksStack(extractItem, destStack)))
-                                {
-                                    extractItem = handler.extractItem(i, 1, false);
-                                    if (destStack.isEmpty())
-                                        dest.setInventorySlotContents(j, extractItem);
-                                    else
-                                    {
-                                        destStack.grow(1);
-                                        dest.setInventorySlotContents(j, destStack);
-                                    }
-                                    dest.markDirty();
-                                    return true;
-                                }
-                            }
-                        }
-                    }
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.DropperBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.DispenserTileEntity;
+import net.minecraft.tileentity.IHopper;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemHandlerHelper;
 
-                    return false;
-                })
-                .orElse(null); // TODO bad null
-    }
+public class HopperBridgeCode {
+	/**
+	 * Copied from TileEntityHopper#captureDroppedItems and added capability support
+	 * 
+	 * @return Null if we did nothing {no IItemHandler}, True if we moved an item,
+	 *         False if we moved no items
+	 */
+	@Nullable
+	public static Boolean extractHook(IHopper dest) {
+		return getItemHandler(dest, Direction.UP).map(itemHandlerResult -> {
+			IItemHandler handler = itemHandlerResult.getKey();
 
-    /**
-     * Copied from BlockDropper#dispense and added capability support
-     */
-    public static boolean dropperInsertHook(World world, BlockPos pos, DispenserTileEntity dropper, int slot, @Nonnull ItemStack stack)
-    {
-        Direction enumfacing = world.getBlockState(pos).get(DispenserBlock.FACING);
-        BlockPos blockpos = pos.offset(enumfacing);
-        return getItemHandler(world, blockpos.getX(), blockpos.getY(), blockpos.getZ(), enumfacing.getOpposite())
-                .map(destinationResult -> {
-                    IItemHandler itemHandler = destinationResult.getKey();
-                    Object destination = destinationResult.getValue();
-                    ItemStack dispensedStack = stack.copy().split(1);
-                    ItemStack remainder = putStackInInventoryAllSlots(dropper, destination, itemHandler, dispensedStack);
+			for (int i = 0; i < handler.getSlots(); i++) {
+				ItemStack extractItem = handler.extractItem(i, 1, true);
+				if (!extractItem.isEmpty()) {
+					for (int j = 0; j < dest.getContainerSize(); j++) {
+						ItemStack destStack = dest.getItem(j);
+						if (dest.canPlaceItem(j, extractItem)
+								&& (destStack.isEmpty() || destStack.getCount() < destStack.getMaxStackSize()
+										&& destStack.getCount() < dest.getMaxStackSize()
+										&& ItemHandlerHelper.canItemStacksStack(extractItem, destStack))) {
+							extractItem = handler.extractItem(i, 1, false);
+							if (destStack.isEmpty())
+								dest.setItem(j, extractItem);
+							else {
+								destStack.grow(1);
+								dest.setItem(j, destStack);
+							}
+							dest.setChanged();
+							return true;
+						}
+					}
+				}
+			}
 
-                    if (remainder.isEmpty())
-                    {
-                        remainder = stack.copy();
-                        remainder.shrink(1);
-                    }
-                    else
-                    {
-                        remainder = stack.copy();
-                    }
+			return false;
+		}).orElse(null); // TODO bad null
+	}
 
-                    dropper.setInventorySlotContents(slot, remainder);
-                    return false;
-                })
-                .orElse(true);
-    }
+	/**
+	 * Copied from BlockDropper#dispense and added capability support
+	 */
+	public static boolean dropperInsertHook(World world, BlockPos pos, DispenserTileEntity dropper, int slot,
+			@Nonnull ItemStack stack) {
+		Direction enumfacing = world.getBlockState(pos).getValue(DispenserBlock.FACING);
+		BlockPos blockpos = pos.relative(enumfacing);
+		return getItemHandler(world, blockpos.getX(), blockpos.getY(), blockpos.getZ(), enumfacing.getOpposite())
+				.map(destinationResult -> {
+					IItemHandler itemHandler = destinationResult.getKey();
+					Object destination = destinationResult.getValue();
+					ItemStack dispensedStack = stack.copy().split(1);
+					ItemStack remainder = putStackInInventoryAllSlots(dropper, destination, itemHandler,
+							dispensedStack);
 
-    /**
-     * Copied from TileEntityHopper#transferItemsOut and added capability support
-     */
-    public static boolean insertHook(FlintTileEntity hopper)
-    {
-        Direction hopperFacing = hopper.getBlockState().get(FlintHopperBlock.FACING);
-        return getItemHandler(hopper, hopperFacing)
-                .map(destinationResult -> {
-                    IItemHandler itemHandler = destinationResult.getKey();
-                    Object destination = destinationResult.getValue();
-                    if (isFull(itemHandler))
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        for (int i = 0; i < hopper.getSizeInventory(); ++i)
-                        {
-                            if (!hopper.getStackInSlot(i).isEmpty())
-                            {
-                                ItemStack originalSlotContents = hopper.getStackInSlot(i).copy();
-                                ItemStack insertStack = hopper.decrStackSize(i, 1);
-                                ItemStack remainder = putStackInInventoryAllSlots(hopper, destination, itemHandler, insertStack);
+					if (remainder.isEmpty()) {
+						remainder = stack.copy();
+						remainder.shrink(1);
+					} else {
+						remainder = stack.copy();
+					}
 
-                                if (remainder.isEmpty())
-                                {
-                                    return true;
-                                }
+					dropper.setItem(slot, remainder);
+					return false;
+				}).orElse(true);
+	}
 
-                                hopper.setInventorySlotContents(i, originalSlotContents);
-                            }
-                        }
+	/**
+	 * Copied from TileEntityHopper#transferItemsOut and added capability support
+	 */
+	public static boolean insertHook(FlintTileEntity hopper) {
+		Direction hopperFacing = Direction.DOWN;
+		return getItemHandler(hopper, hopperFacing).map(destinationResult -> {
+			IItemHandler itemHandler = destinationResult.getKey();
+			Object destination = destinationResult.getValue();
+			if (isFull(itemHandler)) {
+				return false;
+			} else {
+				for (int i = 0; i < hopper.getContainerSize(); ++i) {
+					if (!hopper.getItem(i).isEmpty()) {
+						ItemStack originalSlotContents = hopper.getItem(i).copy();
+						ItemStack insertStack = hopper.removeItem(i, 1);
+						ItemStack remainder = putStackInInventoryAllSlots(hopper, destination, itemHandler,
+								insertStack);
 
-                        return false;
-                    }
-                })
-                .orElse(false);
-    }
+						if (remainder.isEmpty()) {
+							return true;
+						}
 
-    private static ItemStack putStackInInventoryAllSlots(TileEntity source, Object destination, IItemHandler destInventory, ItemStack stack)
-    {
-        for (int slot = 0; slot < destInventory.getSlots() && !stack.isEmpty(); slot++)
-        {
-            stack = insertStack(source, destination, destInventory, stack, slot);
-        }
-        return stack;
-    }
+						hopper.setItem(i, originalSlotContents);
+					}
+				}
 
-    /**
-     * Copied from TileEntityHopper#insertStack and added capability support
-     */
-    private static ItemStack insertStack(TileEntity source, Object destination, IItemHandler destInventory, ItemStack stack, int slot)
-    {
-        ItemStack itemstack = destInventory.getStackInSlot(slot);
+				return false;
+			}
+		}).orElse(false);
+	}
 
-        if (destInventory.insertItem(slot, stack, true).isEmpty())
-        {
-            boolean insertedItem = false;
-            boolean inventoryWasEmpty = isEmpty(destInventory);
+	private static ItemStack putStackInInventoryAllSlots(TileEntity source, Object destination,
+			IItemHandler destInventory, ItemStack stack) {
+		for (int slot = 0; slot < destInventory.getSlots() && !stack.isEmpty(); slot++) {
+			stack = insertStack(source, destination, destInventory, stack, slot);
+		}
+		return stack;
+	}
 
-            if (itemstack.isEmpty())
-            {
-                destInventory.insertItem(slot, stack, false);
-                stack = ItemStack.EMPTY;
-                insertedItem = true;
-            }
-            else if (ItemHandlerHelper.canItemStacksStack(itemstack, stack))
-            {
-                int originalSize = stack.getCount();
-                stack = destInventory.insertItem(slot, stack, false);
-                insertedItem = originalSize < stack.getCount();
-            }
+	/**
+	 * Copied from TileEntityHopper#insertStack and added capability support
+	 */
+	private static ItemStack insertStack(TileEntity source, Object destination, IItemHandler destInventory,
+			ItemStack stack, int slot) {
+		ItemStack itemstack = destInventory.getStackInSlot(slot);
 
-            if (insertedItem)
-            {
-                if (inventoryWasEmpty && destination instanceof FlintTileEntity)
-                {
-                    FlintTileEntity destinationHopper = (FlintTileEntity)destination;
+		if (destInventory.insertItem(slot, stack, true).isEmpty()) {
+			boolean insertedItem = false;
+			boolean inventoryWasEmpty = isEmpty(destInventory);
 
-                    if (!destinationHopper.mayTransfer())
-                    {
-                        int k = 0;
-/* TODO TileEntityHopper patches
-                        if (source instanceof TileEntityHopper)
-                        {
-                            if (destinationHopper.getLastUpdateTime() >= ((TileEntityHopper) source).getLastUpdateTime())
-                            {
-                                k = 1;
-                            }
-                        }
-*/
-                        destinationHopper.setTransferCooldown(8 - k);
-                    }
-                }
-            }
-        }
+			if (itemstack.isEmpty()) {
+				destInventory.insertItem(slot, stack, false);
+				stack = ItemStack.EMPTY;
+				insertedItem = true;
+			} else if (ItemHandlerHelper.canItemStacksStack(itemstack, stack)) {
+				int originalSize = stack.getCount();
+				stack = destInventory.insertItem(slot, stack, false);
+				insertedItem = originalSize < stack.getCount();
+			}
 
-        return stack;
-    }
+			if (insertedItem) {
+				if (inventoryWasEmpty && destination instanceof FlintTileEntity) {
+					FlintTileEntity destinationHopper = (FlintTileEntity) destination;
 
-    private static LazyOptional<Pair<IItemHandler, Object>> getItemHandler(IHopper hopper, Direction hopperFacing)
-    {
-        double x = hopper.getXPos() + hopperFacing.getXOffset();
-        double y = hopper.getYPos() + hopperFacing.getYOffset();
-        double z = hopper.getZPos() + hopperFacing.getZOffset();
-        return getItemHandler(hopper.getWorld(), x, y, z, hopperFacing.getOpposite());
-    }
+					if (!destinationHopper.isOnCustomCooldown()) {
+						int k = 0;
+						if (source instanceof FlintTileEntity) {
+							if (destinationHopper.getLastUpdateTime() >= ((FlintTileEntity) source)
+									.getLastUpdateTime()) {
+								k = 1;
+							}
+						}
+						destinationHopper.setCooldown(8 - k);
+					}
+				}
+			}
+		}
 
-    private static boolean isFull(IItemHandler itemHandler)
-    {
-        for (int slot = 0; slot < itemHandler.getSlots(); slot++)
-        {
-            ItemStack stackInSlot = itemHandler.getStackInSlot(slot);
-            if (stackInSlot.isEmpty() || stackInSlot.getCount() != stackInSlot.getMaxStackSize())
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+		return stack;
+	}
 
-    private static boolean isEmpty(IItemHandler itemHandler)
-    {
-        for (int slot = 0; slot < itemHandler.getSlots(); slot++)
-        {
-            ItemStack stackInSlot = itemHandler.getStackInSlot(slot);
-            if (stackInSlot.getCount() > 0)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+	private static Optional<Pair<IItemHandler, Object>> getItemHandler(IHopper hopper, Direction hopperFacing) {
+		double x = hopper.getLevelX() + hopperFacing.getStepX();
+		double y = hopper.getLevelY() + hopperFacing.getStepY();
+		double z = hopper.getLevelZ() + hopperFacing.getStepZ();
+		return getItemHandler(hopper.getLevel(), x, y, z, hopperFacing.getOpposite());
+	}
 
-    public static LazyOptional<Pair<IItemHandler, Object>> getItemHandler(World worldIn, double x, double y, double z, final Direction side)
-    {
-        int i = MathHelper.floor(x);
-        int j = MathHelper.floor(y);
-        int k = MathHelper.floor(z);
-        BlockPos blockpos = new BlockPos(i, j, k);
-        net.minecraft.block.BlockState state = worldIn.getBlockState(blockpos);
+	private static boolean isFull(IItemHandler itemHandler) {
+		for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
+			ItemStack stackInSlot = itemHandler.getStackInSlot(slot);
+			if (stackInSlot.isEmpty() || stackInSlot.getCount() < itemHandler.getSlotLimit(slot)) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-        if (state.hasTileEntity())
-        {
-            TileEntity tileentity = worldIn.getTileEntity(blockpos);
-            if (tileentity != null)
-            {
-                return tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side)
-                    .lazyMap(capability -> ImmutablePair.<IItemHandler, Object>of(capability, tileentity));
-            }
-        }
+	private static boolean isEmpty(IItemHandler itemHandler) {
+		for (int slot = 0; slot < itemHandler.getSlots(); slot++) {
+			ItemStack stackInSlot = itemHandler.getStackInSlot(slot);
+			if (stackInSlot.getCount() > 0) {
+				return false;
+			}
+		}
+		return true;
+	}
 
-        return LazyOptional.empty();
-    }
+	public static Optional<Pair<IItemHandler, Object>> getItemHandler(World worldIn, double x, double y, double z,
+			final Direction side) {
+		int i = MathHelper.floor(x);
+		int j = MathHelper.floor(y);
+		int k = MathHelper.floor(z);
+		BlockPos blockpos = new BlockPos(i, j, k);
+		net.minecraft.block.BlockState state = worldIn.getBlockState(blockpos);
+
+		if (state.hasTileEntity()) {
+			TileEntity tileentity = worldIn.getBlockEntity(blockpos);
+			if (tileentity != null) {
+				return tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side)
+						.map(capability -> ImmutablePair.<IItemHandler, Object>of(capability, tileentity));
+			}
+		}
+
+		return Optional.empty();
+	}
+
 }

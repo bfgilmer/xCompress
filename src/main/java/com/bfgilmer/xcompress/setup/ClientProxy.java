@@ -6,20 +6,18 @@ import net.minecraft.world.World;
 
 public class ClientProxy implements IProxy {
 
-    @Override
-    public void init() {
+	@Override
+	public void init() {
 
-    }
+	}
 
-    @Override
-    public World getClientWorld() {
-        return Minecraft.getInstance().world;
+	@Override
+	public World getClientWorld() {
+		return Minecraft.getInstance().level;
+	}
 
-    }
-
-    @Override
-    public PlayerEntity getClientPlayer() {
-        return null;
-    }
+	@Override
+	public PlayerEntity getClientPlayer() {
+		return null;
+	}
 }
-

@@ -9,22 +9,23 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class FlintBlock extends FlintHopperBlock {
-    public static final DamageSource FLINT_DAMAGE = new DamageSource("Compressium");
-    
-    public FlintBlock(Integer number) {
-/*    	super(Material.ROCK, SoundType.GROUND, 6.0f*number.floatValue(), (float)Math.pow(5.0f,number.doubleValue())); */
-        super(Properties.create(Material.ROCK)
-                .sound(SoundType.GROUND)
-                .hardnessAndResistance(0.6f*number.floatValue(), 0.6f*(float)Math.pow(2.0f, number.doubleValue())));      
-        setRank(number);
-    }
-    
+	public static final DamageSource FLINT_DAMAGE = new DamageSource("Compressium");
+
+	private final float damageInflicted;
+
+	public FlintBlock(Integer number) {
+		super(Properties.of(Material.STONE).sound(SoundType.GILDED_BLACKSTONE).strength(0.6f * number.floatValue(),
+				0.6f * (float) Math.pow(2.0f, number.doubleValue())));
+
+		this.damageInflicted = (float) (2.0f * Math.pow(2.0f, number.doubleValue()));
+		setRange(number);
+	}
+
 	@Override
-	public void onEntityWalk(World worldIn, BlockPos pos, Entity entityIn) {
-		Integer level = getRank();
-        if (entityIn instanceof MonsterEntity) {
-	        entityIn.attackEntityFrom(FLINT_DAMAGE, 2*level*level);
-        }
-		super.onEntityWalk(worldIn, pos, entityIn);
+	public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
+		if (entityIn instanceof MonsterEntity) {
+			entityIn.hurt(FLINT_DAMAGE, this.damageInflicted);
+		}
+		super.stepOn(worldIn, pos, entityIn);
 	}
 }

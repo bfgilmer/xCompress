@@ -8,9 +8,9 @@ import net.minecraft.item.ItemStack;
 public class XcompresItemGroup extends ItemGroup {
 
 	public XcompresItemGroup() {
-		this(Xcompress.MOD_ID);	
+		this(Xcompress.MOD_ID);
 	}
-	
+
 	public XcompresItemGroup(String label) {
 		super(label);
 	}
@@ -20,7 +20,7 @@ public class XcompresItemGroup extends ItemGroup {
 	}
 
 	@Override
-	public ItemStack createIcon() {
+	public ItemStack makeIcon() {
 		return new ItemStack(ModBlocks.COBBLESTONE_1.get());
 	}
 
