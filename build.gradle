@@ -16,7 +16,7 @@ apply plugin: 'maven-publish'
 def ENV = System.getenv()
 version = ENV.BUILD_NUMBER ? "${mod_version}.${ENV.BUILD_NUMBER}" : "${mod_version}.custom"
 group = 'me.dinnerbeef.compressium' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'Compressium-1.16.4'
+archivesBaseName = 'Compressium-1.16.5'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 

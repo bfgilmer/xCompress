@@ -9,7 +9,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import net.minecraft.block.DispenserBlock;
-import net.minecraft.block.DropperBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.DispenserTileEntity;
 import net.minecraft.tileentity.IHopper;
