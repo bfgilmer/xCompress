@@ -27,6 +27,7 @@ import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.NonNullList;
@@ -39,11 +40,18 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
+
 public class FlintTileEntity extends LockableLootTileEntity implements IHopper, ITickableTileEntity {
+	private static final Logger LOGGER=LogManager.getLogger();
 
 	private NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
 	private int cooldownTime = -1;
 	private long tickedGameTime;
+	private int range=1;
 
 	public FlintTileEntity() {
 		super(ModTileEntities.FLINT.get());
@@ -58,6 +66,8 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 		}
 
 		this.cooldownTime = p_230337_2_.getInt("TransferCooldown");
+		this.range = p_230337_2_.getInt("Range");
+		setCollectionSize(this.range);
 	}
 
 	@Override
@@ -68,6 +78,7 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 		}
 
 		p_189515_1_.putInt("TransferCooldown", this.cooldownTime);
+		p_189515_1_.putInt("Range", this.range);		
 		return p_189515_1_;
 	}
 
@@ -196,7 +207,7 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 	}
 
 	public static boolean suckInItems(IHopper p_145891_0_) {
-		Boolean ret = net.minecraftforge.items.VanillaInventoryCodeHooks.extractHook(p_145891_0_);
+		Boolean ret = HopperBridgeCode.extractHook(p_145891_0_);
 		if (ret != null)
 			return ret;
 		IInventory iinventory = getSourceContainer(p_145891_0_);
@@ -464,15 +475,26 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 		return this.tickedGameTime;
 	}
 
-	private VoxelShape SUCK = VoxelShapes.or(INSIDE, ABOVE);
+	VoxelShape CollectionArea = Block.box(-16.0D, 16.0D, -16.0D, 32.0D, 32.0D, 32.0D);
 
 	@Override
 	public VoxelShape getSuckShape() {
-		return SUCK;
+		return CollectionArea;
 	}
 
 	public void setCollectionSize(Integer range) {
 		double offset = range.doubleValue() * 16.0D;
-		SUCK = Block.box(-offset, -16.0D, -offset, offset, 32.0D, offset);
+		CollectionArea = Block.box(16.0D-offset, 16.0D, 16.0D-offset, offset, 32.0D, offset);
+		setRange(range);
+		
+        Marker marker = MarkerManager.getMarker("CLASS");
+        LOGGER.info(marker, "Collection Box "+ CollectionArea.toAabbs().toString());
+		LOGGER.info("Collection Area X " + Double.toString(CollectionArea.bounds().getXsize())
+		                         + " Y " + Double.toString(CollectionArea.bounds().getYsize())
+		                         + " Z " + Double.toString(CollectionArea.bounds().getZsize()));
+	}
+
+	private void setRange(Integer range) {
+		this.range = range.intValue();
 	}
 }
