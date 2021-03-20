@@ -2,6 +2,8 @@ package com.bfgilmer.xcompress.item;
 
 import java.util.function.Function;
 
+import net.minecraft.item.ItemStack;
+
 public class CompressorItem extends BaseItem {
 	private final boolean damage;
 	private final boolean tooltip;
@@ -30,5 +32,17 @@ public class CompressorItem extends BaseItem {
 
 	public boolean isTooltip() {
 		return tooltip;
+	}
+	
+	@Override
+	public boolean hasContainerItem(ItemStack stack) {
+		return true;
+	}
+	
+	@Override
+	public ItemStack getContainerItem(ItemStack stack) {
+		ItemStack copy = stack.copy();
+		copy.setCount(1);
+		return copy;
 	}
 }

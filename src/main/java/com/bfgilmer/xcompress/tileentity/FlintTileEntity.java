@@ -27,7 +27,6 @@ import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.HopperTileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.EntityPredicates;
 import net.minecraft.util.NonNullList;
@@ -40,14 +39,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
-
 public class FlintTileEntity extends LockableLootTileEntity implements IHopper, ITickableTileEntity {
-	private static final Logger LOGGER=LogManager.getLogger();
-
 	private NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
 	private int cooldownTime = -1;
 	private long tickedGameTime;
@@ -485,13 +477,7 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 	public void setCollectionSize(Integer range) {
 		double offset = range.doubleValue() * 16.0D;
 		CollectionArea = Block.box(16.0D-offset, 16.0D, 16.0D-offset, offset, 32.0D, offset);
-		setRange(range);
-		
-        Marker marker = MarkerManager.getMarker("CLASS");
-        LOGGER.info(marker, "Collection Box "+ CollectionArea.toAabbs().toString());
-		LOGGER.info("Collection Area X " + Double.toString(CollectionArea.bounds().getXsize())
-		                         + " Y " + Double.toString(CollectionArea.bounds().getYsize())
-		                         + " Z " + Double.toString(CollectionArea.bounds().getZsize()));
+		setRange(range);		
 	}
 
 	private void setRange(Integer range) {
