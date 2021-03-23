@@ -14,7 +14,7 @@ public class FlintBlock extends FlintHopperBlock {
 	private final float damageInflicted;
 
 	public FlintBlock(Integer number) {
-		super(Properties.of(Material.STONE).sound(SoundType.GILDED_BLACKSTONE).strength(0.6f * number.floatValue(),
+		super(Properties.of(Material.GLASS).sound(SoundType.GILDED_BLACKSTONE).strength(0.6f * number.floatValue(),
 				0.6f * (float) Math.pow(2.0f, number.doubleValue())));
 
 		this.damageInflicted = (float) (2.0f * Math.pow(2.0f, number.doubleValue()));

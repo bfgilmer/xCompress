@@ -6,7 +6,7 @@ import net.minecraft.block.material.Material;
 
 public class SoulsandBlock extends SoulSandBlock {
 	public SoulsandBlock(Integer number) {
-		super(Properties.of(Material.SAND).sound(SoundType.SAND).strength(0.5f, 0.5f));
+		super(Properties.of(Material.SAND).sound(SoundType.SAND).strength(0.5f).speedFactor((float) (0.5/number.floatValue())));
 	}
 
 }
