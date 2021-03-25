@@ -9,4 +9,5 @@ public class GravelBlock extends FallingBlock {
 		super(Properties.of(Material.SAND).sound(SoundType.STONE).strength(0.6f * number.floatValue(),
 				0.6f * (float) Math.pow(2.0f, number.doubleValue())));
 	}
+
 }
