@@ -24,7 +24,7 @@ public class IronBlock extends BaseBlock {
 	public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
 
 	public IronBlock(Integer number) {
-		super(Properties.of(Material.METAL).sound(SoundType.METAL)
+		super(Properties.of(Material.HEAVY_METAL).sound(SoundType.METAL)
 				.strength(6.0f * number.floatValue(), 0.6f * (float) Math.pow(2.0f, number.doubleValue()))
 				.lightLevel(litBlockEmission(15)).isRedstoneConductor(IronBlock::control));
 		this.registerDefaultState(this.defaultBlockState().setValue(LIT, Boolean.valueOf(false)));

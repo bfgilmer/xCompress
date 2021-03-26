@@ -54,5 +54,12 @@
   "block.xcompress.iron_1": "Compressed Block Of Iron (8)",
   "block.xcompress.iron_2": "Double-Compressed Block Of Iron (64)",
   "block.xcompress.iron_3": "Triple-Compressed Block Of Iron (512)",
-  "block.xcompress.iron_4": "Quad-Compressed Block Of Iron (4096)"
-}
+  "block.xcompress.iron_4": "Quad-Compressed Block Of Iron (4096)",
+  
+  "block.xcompress.slime_1": "Compressed Block Of Slime (8)",
+  "block.xcompress.slime_2": "Double-Compressed Block Of Slime (64)",
+  "block.xcompress.slime_3": "Triple-Compressed Block Of Slime (512)",
+  "block.xcompress.slime_4": "Quad-Compressed Block Of Slime (4096)",
+  
+  "block:xcompress.glazed_slime": "Glaze Slime"
+  }

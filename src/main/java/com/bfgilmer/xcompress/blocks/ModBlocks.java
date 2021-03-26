@@ -96,6 +96,9 @@ public class ModBlocks {
 	public static final RegistryObject<Block> SLIME_2 = register("slime_2", () -> new SlimeBlock(2));
 	public static final RegistryObject<Block> SLIME_3 = register("slime_3", () -> new SlimeBlock(3));
 	public static final RegistryObject<Block> SLIME_4 = register("slime_4", () -> new SlimeBlock(4));
+	
+	// Glazed Slime
+	public static final RegistryObject<Block> GLAZED_SLIME = register("glazed_slime", () -> new GlazedSlimeBlock());
 
 	@SubscribeEvent
 	public void onRegisterBlocks(RegistryEvent.Register<Block> event) {

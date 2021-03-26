@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "xcompress:slime_1"
+  },
+  "result": "xcompress:glazed_slime",
+  "experience": 1,
+  "cookingtime": 300
+}
