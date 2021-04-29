@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeBlock;
 
 public class FlintHopperBlock extends ContainerBlock implements IForgeBlock {
-	private int range = 0; // Collection area = 0 is above and {1-4} is the distance from the block
+	private int range = 1; // Collection area = 0 is above and {1-4} is the distance from the block
 
 	public FlintHopperBlock(Block.Properties properties) {
 		super(properties);
@@ -32,6 +32,8 @@ public class FlintHopperBlock extends ContainerBlock implements IForgeBlock {
 		} else {
 			TileEntity tileentity = worldIn.getBlockEntity(pos);
 			if (tileentity instanceof FlintTileEntity) {
+				((FlintTileEntity) tileentity).setCollectionSize(Integer.valueOf(this.range));
+				
 				player.openMenu((FlintTileEntity) tileentity);
 				player.awardStat(Stats.INSPECT_HOPPER);
 			}
