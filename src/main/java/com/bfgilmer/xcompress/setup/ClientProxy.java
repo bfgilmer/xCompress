@@ -11,6 +11,7 @@ public class ClientProxy implements IProxy {
 
 	}
 
+	@SuppressWarnings("resource")
 	@Override
 	public World getClientWorld() {
 		return Minecraft.getInstance().level;
