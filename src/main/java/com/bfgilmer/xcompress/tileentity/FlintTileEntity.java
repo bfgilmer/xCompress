@@ -7,6 +7,8 @@ import java.util.stream.IntStream;
 
 import javax.annotation.Nullable;
 
+import com.bfgilmer.xcompress.blocks.FlintBlock;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
@@ -110,6 +112,12 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 				this.tryMoveItems(() -> {
 					return suckInItems(this);
 				});
+				
+		         BlockState blockstate = this.getBlockState();
+		         Block block = blockstate.getBlock();
+		         if (block instanceof FlintBlock) {
+		            FlintBlock.updateState(blockstate, this.level, this.worldPosition, this.isEmpty());
+		         }
 			}
 
 		}
