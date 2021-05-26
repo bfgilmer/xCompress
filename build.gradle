@@ -18,7 +18,7 @@ version = ENV.BUILD_NUMBER ? "${mod_version}.${ENV.BUILD_NUMBER}" : "${mod_versi
 group = 'com.bfgilmer.xcompress' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'Compressium-1.16.5'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '14' // Need this here so eclipse task generates correctly.
 
 minecraft {
     // The mappings can be changed at any time, and must be in the following format.
@@ -86,6 +86,9 @@ minecraft {
     }
 }
 
+repositories {
+    maven { url 'https://modmaven.dev/' }
+}
 
 dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
@@ -94,8 +97,9 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.1.0'
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
-    // compile "some.group:artifact:version:classifier"
     // compile "some.group:artifact:version"
+    compile "mekanism:Mekanism:${mekanism_version}:api"
+    compile "mekanism:Mekanism:${mekanism_version}"
 
     // Real examples
     // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env

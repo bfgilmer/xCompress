@@ -27,7 +27,7 @@ public class Xcompress {
 	public static final ItemGroup ITEM_GROUP = new XcompresItemGroup(Xcompress.MOD_ID);
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	public static IProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+	public static IProxy proxy = DistExecutor.safeRunForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
 	public Xcompress() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
