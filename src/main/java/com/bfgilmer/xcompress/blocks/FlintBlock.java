@@ -12,13 +12,14 @@ public class FlintBlock extends FlintHopperBlock {
 	public static final DamageSource FLINT_DAMAGE = new DamageSource("Compressium");
 
 	private final float damageInflicted;
+	private static final int RANGES[] = {1, 1, 3, 5, 7};
 
 	public FlintBlock(Integer number) {
 		super(Properties.of(Material.GLASS).sound(SoundType.GILDED_BLACKSTONE).strength(0.6f * number.floatValue(),
 				0.6f * (float) Math.pow(2.0f, number.doubleValue())).noOcclusion());
 
 		this.damageInflicted = (float) (2.0f * Math.pow(2.0f, number.doubleValue()));
-		setRange(number);
+		setRange(RANGES[number]);
 	}
 
 	@Override
