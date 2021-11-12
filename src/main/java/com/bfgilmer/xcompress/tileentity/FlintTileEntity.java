@@ -487,7 +487,7 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 
 	public void setCollectionSize(Integer range) {
 		double offset = range.doubleValue() * 32.0D;
-		CollectionArea = Block.box(16.0D-offset, 16.0D, 16.0D-offset, offset, 32.0D, offset);
+		CollectionArea = Block.box(16.0D-offset, -16.0D, 16.0D-offset, offset, 32.0D, offset);
 		setRange(range);		
 	}
 
