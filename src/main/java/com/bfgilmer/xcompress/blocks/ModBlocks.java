@@ -73,6 +73,9 @@ public class ModBlocks {
 	public static final RegistryObject<BaseBlock> DIRT_3 = register("dirt_3", () -> new DirtBlock(3));
 	public static final RegistryObject<BaseBlock> DIRT_4 = register("dirt_4", () -> new DirtBlock(4));
 
+	// dirt stair
+	public static final RegistryObject<DirtStairBlock> DIRTSTAIR_1 = register("dirt_stairs", () -> new DirtStairBlock(1));
+
 	// Stone
 	public static final RegistryObject<BaseBlock> STONE_1 = register("stone_1", () -> new StoneBlock(1));
 	public static final RegistryObject<BaseBlock> STONE_2 = register("stone_2", () -> new StoneBlock(2));

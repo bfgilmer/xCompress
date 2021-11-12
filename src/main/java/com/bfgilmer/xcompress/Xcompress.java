@@ -92,6 +92,8 @@ public class Xcompress {
 		RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_2.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_3.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.DIRT_4.get(), RenderType.cutout());
+				
+		RenderTypeLookup.setRenderLayer(ModBlocks.DIRTSTAIR_1.get(), RenderType.cutout());
 
 		RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_1.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.FLINT_2.get(), RenderType.cutout());

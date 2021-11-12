@@ -1,0 +1,8 @@
+{
+  "variants": {
+        "facing=north": { "model": "xcompress:block/dirt_stairs" },
+        "facing=east": { "model": "xcompress:block/dirt_stairs", "y": 90 },
+        "facing=south": { "model": "xcompress:block/dirt_stairs", "y": 180 },
+        "facing=west": { "model": "xcompress:block/dirt_stairs", "y": 270 }
+  }
+}
