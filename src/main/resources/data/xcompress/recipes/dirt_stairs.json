@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "x  ",
+    "xx ",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "xcompress:dirt_1"
+    }
+  },
+  "result": {
+    "item": "xcompress:dirt_stairs"
+  }
+}
