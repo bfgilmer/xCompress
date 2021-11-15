@@ -11,6 +11,7 @@ import com.bfgilmer.xcompress.item.ModItems;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -101,7 +102,7 @@ public class ModBlocks {
 	public static final RegistryObject<Block> SLIME_4 = register("slime_4", () -> new SlimeBlock(4));
 	
 	// Glazed Slime
-	public static final RegistryObject<Block> GLAZED_SLIME = register("glazed_slime", () -> new GlazedSlimeBlock());
+	public static final RegistryObject<Block> GLAZED_SLIME = register("glazed_slime", () -> new GlazedSlimeBlock(ParticleTypes.FLAME));
 
 	@SubscribeEvent
 	public void onRegisterBlocks(RegistryEvent.Register<Block> event) {
