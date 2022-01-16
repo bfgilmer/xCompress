@@ -347,26 +347,26 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 	}
 
 	@Nullable
-	public static IInventory getSourceContainer(IHopper p_145884_0_) {
-		return getContainerAt(p_145884_0_.getLevel(), p_145884_0_.getLevelX(), p_145884_0_.getLevelY() + 1.0D,
-				p_145884_0_.getLevelZ());
+	public static IInventory getSourceContainer(IHopper hopper) {
+		return getContainerAt(hopper.getLevel(), hopper.getLevelX(), hopper.getLevelY() + 1.0D,
+				hopper.getLevelZ());
 	}
 
-	public static List<ItemEntity> getItemsAtAndAbove(IHopper p_200115_0_) {
-		return p_200115_0_.getSuckShape().toAabbs().stream().flatMap((p_200110_1_) -> {
-			return p_200115_0_.getLevel()
+	public static List<ItemEntity> getItemsAtAndAbove(IHopper hopper) {
+		return hopper.getSuckShape().toAabbs().stream().flatMap((blk) -> {
+			return hopper.getLevel()
 					.getEntitiesOfClass(
-							ItemEntity.class, p_200110_1_.move(p_200115_0_.getLevelX() - 0.5D,
-									p_200115_0_.getLevelY() - 0.5D, p_200115_0_.getLevelZ() - 0.5D),
+							ItemEntity.class, blk.move(hopper.getLevelX() - 0.5D,
+									hopper.getLevelY() - 0.5D, hopper.getLevelZ() - 0.5D),
 							EntityPredicates.ENTITY_STILL_ALIVE)
 					.stream();
 		}).collect(Collectors.toList());
 	}
 
 	@Nullable
-	public static IInventory getContainerAt(World p_195484_0_, BlockPos p_195484_1_) {
-		return getContainerAt(p_195484_0_, p_195484_1_.getX() + 0.5D, p_195484_1_.getY() + 0.5D,
-				p_195484_1_.getZ() + 0.5D);
+	public static IInventory getContainerAt(World world, BlockPos blk) {
+		return getContainerAt(world, blk.getX() + 0.5D, blk.getY() + 0.5D,
+				blk.getZ() + 0.5D);
 	}
 
 	@Nullable
@@ -487,7 +487,7 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 
 	public void setCollectionSize(Integer range) {
 		double offset = range.doubleValue() * 32.0D;
-		CollectionArea = Block.box(16.0D-offset, -16.0D, 16.0D-offset, offset, 32.0D, offset);
+		CollectionArea = Block.box(16.0D-offset, 16.0D-offset, 16.0D-offset, offset, offset, offset);
 		setRange(range);		
 	}
 

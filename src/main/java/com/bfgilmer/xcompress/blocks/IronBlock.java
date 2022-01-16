@@ -1,6 +1,7 @@
 package com.bfgilmer.xcompress.blocks;
 
 import java.util.Random;
+
 import java.util.function.ToIntFunction;
 
 import javax.annotation.Nullable;
@@ -54,34 +55,36 @@ public class IronBlock extends BaseBlock {
 			Direction p_180656_4_) {
 		return 15;
 	}
-	
-	   @Nullable
-	   public BlockState getStateForPlacement(BlockItemUseContext context) {
-	      return this.defaultBlockState().setValue(LIT, Boolean.valueOf(context.getLevel().hasNeighborSignal(context.getClickedPos())));
-	   }
 
-	   public void neighborChanged(BlockState blockState, World world, BlockPos blockPosition, Block block, BlockPos p_220069_5_, boolean p_220069_6_) {
-	      if (!world.isClientSide) {
-	         boolean flag = blockState.getValue(LIT);
-	         if (flag != world.hasNeighborSignal(blockPosition)) {
-	            if (flag) {
-	               world.getBlockTicks().scheduleTick(blockPosition, this, 4);
-	            } else {
-	               world.setBlock(blockPosition, blockState.cycle(LIT), 2);
-	            }
-	         }
+	@Nullable
+	public BlockState getStateForPlacement(BlockItemUseContext context) {
+		return this.defaultBlockState().setValue(LIT,
+				Boolean.valueOf(context.getLevel().hasNeighborSignal(context.getClickedPos())));
+	}
 
-	      }
-	   }
+	public void neighborChanged(BlockState blockState, World world, BlockPos blockPosition, Block block,
+			BlockPos p_220069_5_, boolean p_220069_6_) {
+		if (!world.isClientSide) {
+			boolean flag = blockState.getValue(LIT);
+			if (flag != world.hasNeighborSignal(blockPosition)) {
+				if (flag) {
+					world.getBlockTicks().scheduleTick(blockPosition, this, 4);
+				} else {
+					world.setBlock(blockPosition, blockState.cycle(LIT), 2);
+				}
+			}
 
-	   public void tick(BlockState blockState, ServerWorld world, BlockPos blockPosition, Random p_225534_4_) {
-	      if (blockState.getValue(LIT) && !world.hasNeighborSignal(blockPosition)) {
-	         world.setBlock(blockPosition, blockState.cycle(LIT), 2);
-	      }
+		}
+	}
 
-	   }
+	public void tick(BlockState blockState, ServerWorld world, BlockPos blockPosition, Random p_225534_4_) {
+		if (blockState.getValue(LIT) && !world.hasNeighborSignal(blockPosition)) {
+			world.setBlock(blockPosition, blockState.cycle(LIT), 2);
+		}
 
-	   protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
-	      builder.add(LIT);
-	   }
+	}
+
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
+		builder.add(LIT);
+	}
 }

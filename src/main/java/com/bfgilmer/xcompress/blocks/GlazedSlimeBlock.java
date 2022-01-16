@@ -20,26 +20,20 @@ import net.minecraftforge.api.distmarker.OnlyIn;
  *
  */
 public class GlazedSlimeBlock extends BaseBlock {
-	protected final IParticleData flameParticle;
-
-	public GlazedSlimeBlock(IParticleData p_i241189_2_ ) {
+	public GlazedSlimeBlock() {
 		super(Properties.of(Material.CLAY).sound(SoundType.STONE).strength(0.6f, 0.6f));
-	      this.flameParticle = p_i241189_2_;
 	}
-	
-	public GlazedSlimeBlock(Integer number, IParticleData p_i241189_2_) {
+
+	public GlazedSlimeBlock(Integer number, IParticleData particle) {
 		super(Properties.of(Material.CLAY).sound(SoundType.STONE).strength(0.6f * number.floatValue(),
 				0.6f * (float) Math.pow(2.0f, number.doubleValue())));
-	      this.flameParticle = p_i241189_2_;
 	}
 
-	   @OnlyIn(Dist.CLIENT)
-	   public void animateTick(BlockState blockState, World world, BlockPos blockPosition, Random rand) {
-	      double d0 = (double)blockPosition.getX() + 0.5D;
-	      double d1 = (double)blockPosition.getY() + 0.7D;
-	      double d2 = (double)blockPosition.getZ() + 0.5D;
-	      world.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-	      world.addParticle(this.flameParticle, d0, d1, d2, 0.0D, 0.0D, 0.0D);
-	   }
-	   
+	@OnlyIn(Dist.CLIENT)
+	public void animateTick(BlockState blockState, World world, BlockPos blockPosition, Random rand) {
+		double d0 = (double) blockPosition.getX() + 0.5D;
+		double d1 = (double) blockPosition.getY() + 0.7D;
+		double d2 = (double) blockPosition.getZ() + 0.5D;
+		world.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+	}
 }

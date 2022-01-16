@@ -1,0 +1,21 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "mekanism:substrate"
+        },
+        {
+            "item": "mekanism:substrate"
+        },
+        {
+            "item": "mekanism:substrate"
+        },
+        {
+            "item": "mekanism:substrate"
+        }   
+     ],
+    "result": {
+        "item": "minecraft:coal",
+        "count": 1
+    }
+}

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.bfgilmer.xcompress.blocks.ModBlocks;
 import com.bfgilmer.xcompress.item.ModItems;
+import com.bfgilmer.xcompress.particles.ModParticle;
 import com.bfgilmer.xcompress.setup.ClientProxy;
 import com.bfgilmer.xcompress.setup.IProxy;
 import com.bfgilmer.xcompress.setup.ServerProxy;
@@ -32,7 +33,10 @@ public class Xcompress {
 	public Xcompress() {
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
+		LOGGER.debug("Loading %s", MOD_ID);
+		
 		bus.register(this);
+		bus.register(new ModParticle());
 		bus.register(new ModBlocks());
 		bus.register(new ModItems());
 		bus.register(new ModTileEntities());
@@ -40,8 +44,14 @@ public class Xcompress {
 		// Register the setup method for modloading
 		bus.addListener(this::setup);
 		bus.addListener(this::clientsetup);
+		bus.addListener(this::preInit);
 	}
-
+	
+    public void preInit(FMLCommonSetupEvent evt)
+    {
+ //       IronTileEntity.register();
+    }
+    
 	private void clientsetup(final FMLClientSetupEvent event) {
 		RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_1.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(ModBlocks.SOULSAND_2.get(), RenderType.cutout());
