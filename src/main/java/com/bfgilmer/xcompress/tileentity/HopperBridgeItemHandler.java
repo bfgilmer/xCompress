@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class HopperBridgeItemHandler extends InvWrapper {
-	private final FlintTileEntity hopper;
+	private final BaseFlintTileEntity hopper;
 
-	public HopperBridgeItemHandler(FlintTileEntity hopper) {
+	public HopperBridgeItemHandler(BaseFlintTileEntity hopper) {
 		super(hopper);
 		this.hopper = hopper;
 	}

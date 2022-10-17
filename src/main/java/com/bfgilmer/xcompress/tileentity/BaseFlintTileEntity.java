@@ -8,7 +8,8 @@ import java.util.stream.IntStream;
 import javax.annotation.Nullable;
 
 import com.bfgilmer.xcompress.blocks.FlintBlock;
-
+import com.bfgilmer.xcompress.inventory.FlintContainer;
+import com.bfgilmer.xcompress.inventory.FlintTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.ChestBlock;
@@ -21,7 +22,6 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.ISidedInventoryProvider;
 import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
-import net.minecraft.inventory.container.HopperContainer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.ChestTileEntity;
@@ -29,6 +29,7 @@ import net.minecraft.tileentity.IHopper;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.EntityPredicates;
@@ -44,27 +45,28 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-public class FlintTileEntity extends LockableLootTileEntity implements IHopper, ITickableTileEntity {
-	private NonNullList<ItemStack> items = NonNullList.withSize(5, ItemStack.EMPTY);
+public class BaseFlintTileEntity extends LockableLootTileEntity implements IHopper, ITickableTileEntity {
+	private NonNullList<ItemStack> items = NonNullList.withSize(6, ItemStack.EMPTY);
 	private int cooldownTime = -1;
 	private long tickedGameTime;
-	private int range=1;
-
-	public FlintTileEntity() {
-		super(ModTileEntities.FLINT.get());
+	private int flintLevel=0; 
+	private VoxelShape CollectionArea= Block.box(-16D, -16D, -16D, 16D, 16D, 16D);
+	
+	public BaseFlintTileEntity(TileEntityType<?> fte, int flevel) {
+		super(fte);
+		this.flintLevel=FlintTypes.getLevel(flevel);
+		this.items = NonNullList.withSize(FlintTypes.createFlintType(this.flintLevel).getSlots(), ItemStack.EMPTY);
+		this.CollectionArea = FlintTypes.getSuckShape(this.flintLevel);
 	}
 
 	@Override
 	public void load(BlockState blockState, CompoundNBT nbt) {
 		super.load(blockState, nbt);
-		this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
 		if (!this.tryLoadLootTable(nbt)) {
 			ItemStackHelper.loadAllItems(nbt, this.items);
 		}
 
 		this.cooldownTime = nbt.getInt("TransferCooldown");
-		this.range = nbt.getInt("Range");
-		setCollectionSize(this.range);
 	}
 
 	@Override
@@ -75,7 +77,6 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 		}
 
 		nbt.putInt("TransferCooldown", this.cooldownTime);
-		nbt.putInt("Range", this.range);		
 		return nbt;
 	}
 
@@ -102,7 +103,8 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 
 	@Override
 	protected ITextComponent getDefaultName() {
-		return new TranslationTextComponent("container.xcompress.flint_hopper"," %s ",Integer.toString(range));
+		FlintTypes hopperType = FlintTypes.createFlintType(this.flintLevel);
+		return new TranslationTextComponent("container.xcompress.flint_hopper"," %s ",Integer.toString(hopperType.getRange()));
 	}
 
 	@Override
@@ -318,12 +320,12 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 			}
 
 			if (flag) {
-				if (flag1 && p_174916_1_ instanceof FlintTileEntity) {
-					FlintTileEntity FlintTileEntity1 = (FlintTileEntity) p_174916_1_;
+				if (flag1 && p_174916_1_ instanceof BaseFlintTileEntity) {
+					BaseFlintTileEntity FlintTileEntity1 = (BaseFlintTileEntity) p_174916_1_;
 					if (!FlintTileEntity1.isOnCustomCooldown()) {
 						int k = 0;
-						if (p_174916_0_ instanceof FlintTileEntity) {
-							FlintTileEntity FlintTileEntity = (FlintTileEntity) p_174916_0_;
+						if (p_174916_0_ instanceof BaseFlintTileEntity) {
+							BaseFlintTileEntity FlintTileEntity = (BaseFlintTileEntity) p_174916_0_;
 							if (FlintTileEntity1.tickedGameTime >= FlintTileEntity.tickedGameTime) {
 								k = 1;
 							}
@@ -465,8 +467,19 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 	}
 
 	@Override
-	protected Container createMenu(int p_213906_1_, PlayerInventory p_213906_2_) {
-		return new HopperContainer(p_213906_1_, p_213906_2_, this);
+	protected Container createMenu(int worldId, PlayerInventory player) {
+		if (this.flintLevel == 1) {
+			return FlintContainer.createFlintWoodContainer(worldId, player, this);
+		} else if (this.flintLevel == 2) {
+			return FlintContainer.createFlintStoneContainer(worldId, player, this);
+		} else if (this.flintLevel == 3) {
+			return FlintContainer.createFlintIronContainer(worldId, player, this);
+		} else if (this.flintLevel == 4) {
+			return FlintContainer.createFlintDiamondContainer(worldId, player, this);
+		}
+		
+	   // Should never get here since flintLevel is verified	
+	   return null;
 	}
 
 	@Override
@@ -478,24 +491,16 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 		return this.tickedGameTime;
 	}
 
-	VoxelShape CollectionArea = Block.box(-16.0D, 16.0D, -16.0D, 32.0D, 32.0D, 32.0D);
 
+	
 	@Override
 	public VoxelShape getSuckShape() {
 		return CollectionArea;
 	}
 
-	public void setCollectionSize(Integer range) {
-		double offset = range.doubleValue() * 32.0D;
-		CollectionArea = Block.box(16.0D-offset, 16.0D-offset, 16.0D-offset, offset, offset, offset);
-		setRange(range);		
-	}
 
-	private void setRange(Integer range) {
-		this.range = range.intValue();
-	}
-
-	public ActionResultType onRightClick(PlayerEntity player, Direction arg1) {	 
+	public ActionResultType onRightClick(PlayerEntity player, Direction arg1) {
+		int range=FlintTypes.createFlintType(flintLevel).getRange();
 		player.sendMessage((new StringTextComponent("")).append(Integer.toString(range)).withStyle(TextFormatting.RED), player.getUUID());	
 		return ActionResultType.SUCCESS;
 	}
@@ -507,5 +512,9 @@ public class FlintTileEntity extends LockableLootTileEntity implements IHopper, 
 
 	public boolean canUseWrench(ItemStack arg0, PlayerEntity arg1, BlockPos arg2) {
 		return true;
+	}
+
+	public void setLevel(int level) {
+		this.flintLevel=FlintTypes.getLevel(level);		
 	}
 }

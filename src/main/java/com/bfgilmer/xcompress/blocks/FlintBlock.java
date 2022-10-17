@@ -10,16 +10,13 @@ import net.minecraft.world.World;
 
 public class FlintBlock extends FlintHopperBlock {
 	public static final DamageSource FLINT_DAMAGE = new DamageSource("Compressium");
-
 	private final float damageInflicted;
-	private static final int RANGES[] = {1, 2, 5, 7, 9};
-
+	
 	public FlintBlock(Integer number) {
 		super(Properties.of(Material.GLASS).sound(SoundType.GILDED_BLACKSTONE).strength(0.6f * number.floatValue(),
-				0.6f * (float) Math.pow(2.0f, number.doubleValue())).noOcclusion());
+				0.6f * (float) Math.pow(2.0f, number.doubleValue())).noOcclusion(), number);
 
 		this.damageInflicted = (float) (2.0f * Math.pow(2.0f, number.doubleValue()));
-		setRange(RANGES[number]);
 	}
 
 	@Override

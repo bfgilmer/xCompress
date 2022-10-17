@@ -1,7 +1,11 @@
 package com.bfgilmer.xcompress.blocks;
 
-import com.bfgilmer.xcompress.tileentity.FlintTileEntity;
-
+import com.bfgilmer.xcompress.inventory.FlintTypes;
+import com.bfgilmer.xcompress.tileentity.BaseFlintTileEntity;
+import com.bfgilmer.xcompress.tileentity.Flint1TileEntity;
+import com.bfgilmer.xcompress.tileentity.Flint2TileEntity;
+import com.bfgilmer.xcompress.tileentity.Flint3TileEntity;
+import com.bfgilmer.xcompress.tileentity.Flint4TileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -22,11 +26,20 @@ import net.minecraftforge.common.extensions.IForgeBlock;
 
 
 public class FlintHopperBlock extends ContainerBlock implements IForgeBlock {
-	private int range = 1; // Collection area = 0 is above and {1-4} is the distance from the block
+	private final int level;
+	private final FlintTypes hopperType;
+	
     public static final BooleanProperty EMPTY = BooleanProperty.create("empty");
     
 	public FlintHopperBlock(Block.Properties properties) {
+		this(properties,1);
+	}
+
+	public FlintHopperBlock(Block.Properties properties, int level) {
 		super(properties);
+		this.level= FlintTypes.getLevel(level);
+		this.hopperType=FlintTypes.createFlintType(this.level);
+		
 		this.registerDefaultState(this.stateDefinition.any().setValue(EMPTY, true));
 	}
 
@@ -37,17 +50,14 @@ public class FlintHopperBlock extends ContainerBlock implements IForgeBlock {
 			return ActionResultType.SUCCESS;
 		} else {
 			TileEntity tileentity = worldIn.getBlockEntity(pos);
-			if (tileentity instanceof FlintTileEntity) {
-				((FlintTileEntity) tileentity).setCollectionSize(Integer.valueOf(this.range));
-				
-				player.openMenu((FlintTileEntity) tileentity);
+			if (tileentity instanceof BaseFlintTileEntity) {		
+				player.openMenu((BaseFlintTileEntity) tileentity);
 				player.awardStat(Stats.INSPECT_HOPPER);
 			}
 
 			return ActionResultType.SUCCESS;
 		}
 	}
-
 
 	@Override
 	public BlockRenderType getRenderShape(BlockState state) {
@@ -56,25 +66,17 @@ public class FlintHopperBlock extends ContainerBlock implements IForgeBlock {
 	
 	@Override
 	public TileEntity newBlockEntity(IBlockReader blockReader) {
-		FlintTileEntity te = new FlintTileEntity();
-		te.setCollectionSize(getRange());
-		return te;
+		if (getLevel() == 1) {
+			return new Flint1TileEntity();
+		} else if (getLevel() == 2) {
+			return new Flint2TileEntity();
+		} else if (getLevel() == 3) {
+			return new Flint3TileEntity();
+		}  
+		
+		return new Flint4TileEntity();
 	}
 
-	/**
-	 * @return the range
-	 */
-	public int getRange() {
-		return range;
-	}
-
-	/**
-	 * @param range the range to set
-	 */
-	public void setRange(int range) {
-		this.range = range;
-	}
-	
 	@Override
 	  public boolean isSignalSource(BlockState p_149744_1_) {
 	      return true;
@@ -93,5 +95,25 @@ public class FlintHopperBlock extends ContainerBlock implements IForgeBlock {
 	protected void createBlockStateDefinition(Builder<Block, BlockState> builder) {
 		builder.add(EMPTY);
 	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public FlintTypes getHopperType() {
+		return hopperType;
+	}
+
+	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		return this.newBlockEntity(world);
+	}
+
+	@Override
+	public boolean hasTileEntity(BlockState state) {
+		return true;
+	}
+	
+	
 	
 }

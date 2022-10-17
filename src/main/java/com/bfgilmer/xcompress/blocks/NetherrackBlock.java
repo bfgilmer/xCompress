@@ -8,7 +8,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EntitySpawnPlacementRegistry.PlacementType;
 import net.minecraft.entity.passive.ChickenEntity;
+import net.minecraft.entity.passive.SheepEntity;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -36,6 +38,11 @@ public class NetherrackBlock extends BaseBlock {
 			if (!((AgeableEntity) entityIn).isBaby()) {
 				entityIn.hurt(STONE_DAMAGE, this.damageInflicted);
 				entityIn.setSecondsOnFire(3);
+			}
+		
+		if (entityIn instanceof SheepEntity)
+			if (!((SheepEntity) entityIn).isSheared()) {
+				((SheepEntity) entityIn).shear(SoundCategory.NEUTRAL);
 			}
 		super.stepOn(worldIn, pos, entityIn);
 	}

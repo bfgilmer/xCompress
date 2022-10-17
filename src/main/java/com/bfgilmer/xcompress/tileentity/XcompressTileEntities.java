@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import com.bfgilmer.xcompress.Xcompress;
-import com.bfgilmer.xcompress.blocks.ModBlocks;
+import com.bfgilmer.xcompress.blocks.XcompressBlocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
@@ -21,12 +21,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModTileEntities {
+public class XcompressTileEntities {
 
 	private static final List<Supplier<TileEntityType<?>>> ENTRIES = new ArrayList<>();
-	public static final RegistryObject<TileEntityType<FlintTileEntity>> FLINT = register("flint_vac",
-			FlintTileEntity::new, () -> new Block[] { ModBlocks.FLINT_1.get(), ModBlocks.FLINT_2.get(),
-					ModBlocks.FLINT_3.get(), ModBlocks.FLINT_4.get() });
+	public static final RegistryObject<TileEntityType<Flint1TileEntity>> FLINT1 = register("flint1_vac",
+			Flint1TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_1.get() });
+	public static final RegistryObject<TileEntityType<Flint2TileEntity>> FLINT2 = register("flint2_vac",
+			Flint1TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_2.get() });
+	public static final RegistryObject<TileEntityType<Flint3TileEntity>> FLINT3 = register("flint3_vac",
+			Flint1TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_3.get() });
+	public static final RegistryObject<TileEntityType<Flint4TileEntity>> FLINT4 = register("flint4_vac",
+			Flint1TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_4.get() });
 
 	@SubscribeEvent
 	public void onRegisterTypes(RegistryEvent.Register<TileEntityType<?>> event) {

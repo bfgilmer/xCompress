@@ -90,7 +90,7 @@ public class HopperBridgeCode {
 	/**
 	 * Copied from TileEntityHopper#transferItemsOut and added capability support
 	 */
-	public static boolean insertHook(FlintTileEntity hopper) {
+	public static boolean insertHook(BaseFlintTileEntity hopper) {
 		Direction hopperFacing = Direction.DOWN;
 		return getItemHandler(hopper, hopperFacing).map(destinationResult -> {
 			IItemHandler itemHandler = destinationResult.getKey();
@@ -148,13 +148,13 @@ public class HopperBridgeCode {
 			}
 
 			if (insertedItem) {
-				if (inventoryWasEmpty && destination instanceof FlintTileEntity) {
-					FlintTileEntity destinationHopper = (FlintTileEntity) destination;
+				if (inventoryWasEmpty && destination instanceof BaseFlintTileEntity) {
+					BaseFlintTileEntity destinationHopper = (BaseFlintTileEntity) destination;
 
 					if (!destinationHopper.isOnCustomCooldown()) {
 						int k = 0;
-						if (source instanceof FlintTileEntity) {
-							if (destinationHopper.getLastUpdateTime() >= ((FlintTileEntity) source)
+						if (source instanceof BaseFlintTileEntity) {
+							if (destinationHopper.getLastUpdateTime() >= ((BaseFlintTileEntity) source)
 									.getLastUpdateTime()) {
 								k = 1;
 							}

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import com.bfgilmer.xcompress.Xcompress;
-
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -16,7 +15,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModItems {
+public class XcompressItems {
 	public static final List<Supplier<? extends Item>> BLOCK_ENTRIES = new ArrayList<>();
 	public static final List<Supplier<? extends Item>> ITEM_ENTRIES = new ArrayList<>();
 
@@ -39,4 +38,5 @@ public class ModItems {
 //    public static Item COMPRESSOR;
 	public static final RegistryObject<CompressorItem> COMPRESSOR = register("compressor",
 			() -> new CompressorItem(p -> p.tab(Xcompress.ITEM_GROUP)));
+
 }

@@ -1,6 +1,6 @@
 package com.bfgilmer.xcompress;
 
-import com.bfgilmer.xcompress.blocks.ModBlocks;
+import com.bfgilmer.xcompress.blocks.XcompressBlocks;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -21,7 +21,7 @@ public class XcompresItemGroup extends ItemGroup {
 
 	@Override
 	public ItemStack makeIcon() {
-		return new ItemStack(ModBlocks.COBBLESTONE_1.get());
+		return new ItemStack(XcompressBlocks.COBBLESTONE_1.get());
 	}
 
 }

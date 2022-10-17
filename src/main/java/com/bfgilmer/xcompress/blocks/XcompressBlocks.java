@@ -2,22 +2,31 @@ package com.bfgilmer.xcompress.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
 import com.bfgilmer.xcompress.Xcompress;
+import com.bfgilmer.xcompress.client.model.inventory.XcompressItemStackRenderer;
 import com.bfgilmer.xcompress.item.BaseBlockItem;
-import com.bfgilmer.xcompress.item.ModItems;
+import com.bfgilmer.xcompress.item.XcompressItems;
+import com.bfgilmer.xcompress.tileentity.Flint1TileEntity;
+import com.bfgilmer.xcompress.tileentity.Flint2TileEntity;
+import com.bfgilmer.xcompress.tileentity.Flint3TileEntity;
+import com.bfgilmer.xcompress.tileentity.Flint4TileEntity;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 
-public class ModBlocks {
+public class XcompressBlocks {
 	public static final List<Supplier<? extends Block>> BLOCK_ENTRIES = new ArrayList<>();
 
 	// Soulsand
@@ -88,10 +97,10 @@ public class ModBlocks {
 	public static final RegistryObject<BaseBlock> IRON_4 = register("iron_4", () -> new IronBlock(4));
 
 	// Flint
-	public static final RegistryObject<Block> FLINT_1 = register("flint_1", () -> new FlintBlock(1));
-	public static final RegistryObject<Block> FLINT_2 = register("flint_2", () -> new FlintBlock(2));
-	public static final RegistryObject<Block> FLINT_3 = register("flint_3", () -> new FlintBlock(3));
-	public static final RegistryObject<Block> FLINT_4 = register("flint_4", () -> new FlintBlock(4));
+	public static final RegistryObject<Block> FLINT_1 = register("flint_1", () -> new FlintBlock(1), () -> flint1Renderer());
+	public static final RegistryObject<Block> FLINT_2 = register("flint_2", () -> new FlintBlock(2), () -> flint2Renderer());
+	public static final RegistryObject<Block> FLINT_3 = register("flint_3", () -> new FlintBlock(3), () -> flint3Renderer());
+	public static final RegistryObject<Block> FLINT_4 = register("flint_4", () -> new FlintBlock(4), () -> flint4Renderer());
 
 	// Slime
 	public static final RegistryObject<Block> SLIME_1 = register("slime_1", () -> new SlimeBlock(1));
@@ -101,6 +110,9 @@ public class ModBlocks {
 	
 	// Glazed Slime
 	public static final RegistryObject<Block> GLAZED_SLIME = register("glazed_slime", () -> new GlazedSlimeBlock());
+	
+	// Eggs
+	public static final RegistryObject<Block> EGGS = register("eggs", () -> new EggBlock());
 
 	@SubscribeEvent
 	public void onRegisterBlocks(RegistryEvent.Register<Block> event) {
@@ -113,12 +125,16 @@ public class ModBlocks {
 		return register(name, block, b -> () -> new BaseBlockItem(b.get(), p -> p.tab(Xcompress.ITEM_GROUP)));
 	}
 
+	private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block, Supplier<Callable<ItemStackTileEntityRenderer>> renderMethod) {
+		return register(name, block, b -> () -> new BaseBlockItem(b.get(), p -> p.tab(Xcompress.ITEM_GROUP).setISTER(renderMethod)));
+	}
+
 	private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block,
 			Function<RegistryObject<T>, Supplier<? extends BlockItem>> item) {
 		ResourceLocation loc = new ResourceLocation(Xcompress.MOD_ID, name);
 		BLOCK_ENTRIES.add(() -> block.get().setRegistryName(loc));
 		RegistryObject<T> reg = RegistryObject.of(loc, ForgeRegistries.BLOCKS);
-		ModItems.BLOCK_ENTRIES.add(() -> item.apply(reg).get().setRegistryName(loc));
+		XcompressItems.BLOCK_ENTRIES.add(() -> item.apply(reg).get().setRegistryName(loc));
 		return reg;
 	}
 
@@ -127,4 +143,21 @@ public class ModBlocks {
 		BLOCK_ENTRIES.add(() -> block.get().setRegistryName(loc));
 		return RegistryObject.of(loc, ForgeRegistries.BLOCKS);
 	}
+	
+	  @OnlyIn(Dist.CLIENT)
+	  private static Callable<ItemStackTileEntityRenderer> flint1Renderer() {
+	    return () -> new XcompressItemStackRenderer<Flint1TileEntity>(Flint1TileEntity::new);
+	  }
+	  private static Callable<ItemStackTileEntityRenderer> flint2Renderer() {
+		    return () -> new XcompressItemStackRenderer<Flint2TileEntity>(Flint2TileEntity::new);
+		  }
+	  private static Callable<ItemStackTileEntityRenderer> flint3Renderer() {
+		    return () -> new XcompressItemStackRenderer<Flint3TileEntity>(Flint3TileEntity::new);
+		  }
+	  private static Callable<ItemStackTileEntityRenderer> flint4Renderer() {
+		    return () -> new XcompressItemStackRenderer<Flint4TileEntity>(Flint4TileEntity::new);
+		  }
+
+
+
 }

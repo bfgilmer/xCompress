@@ -23,7 +23,7 @@ import net.minecraftforge.registries.IForgeRegistry;
  *
  */
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModParticle {	
+public class XcompressParticle {	
 	public static final List<Supplier<? extends ParticleType<?>>> PARTICLE_ENTRIES = new ArrayList<>();
 
 	

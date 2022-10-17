@@ -1,0 +1,38 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "#",
+        "M"
+    ],
+    "key": {
+        "#": [
+      {
+        "item": "minecraft:coal"
+      },
+      {
+        "item": "minecraft:charcoal"
+      },
+      { 
+        "item": "almostalltheores:anthracite"
+      },
+      {
+        "item": "almostalltheores:lignite"
+      },
+	  {
+		"item": "almostalltheores:bituminous_coal"
+	  }
+    ],
+        "M": [
+        {
+            "item": "mekanism:hdpe_stick"
+        },
+        {
+            "tag": "forge:rods/wooden"
+        } 
+    ]
+    },
+    "result": {
+        "item": "minecraft:torch",
+        "count": 4
+    }
+}
