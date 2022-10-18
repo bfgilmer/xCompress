@@ -104,7 +104,7 @@ public class BaseFlintTileEntity extends LockableLootTileEntity implements IHopp
 	@Override
 	protected ITextComponent getDefaultName() {
 		FlintTypes hopperType = FlintTypes.createFlintType(this.flintLevel);
-		return new TranslationTextComponent("container.xcompress.flint_hopper"," %s ",Integer.toString(hopperType.getRange()));
+		return new TranslationTextComponent("container.xcompress.flint_hopper",Integer.toString(hopperType.getRange()));
 	}
 
 	@Override

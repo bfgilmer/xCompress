@@ -62,5 +62,5 @@
   "block.xcompress.slime_4": "Quad-Compressed Block Of Slime (4096)",
   
   "block.xcompress.glazed_slime": "Glaze Slime",
-  "container.xcompress.flint_hopper": "Flint Vacuum"
+  "container.xcompress.flint_hopper": "Flint Vacuum %1$s"
   }

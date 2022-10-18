@@ -71,7 +71,6 @@ public class FlintContainer extends Container {
 					this.addSlot(new Slot(playerInventory, playerInvCol + playerInvRow * 9 + 9,
 							leftCol + playerInvCol * 18, hopperType.ySize - (4 - playerInvRow) * 18 - 1));
 				}
-
 			}
 
 			for (int hotbarSlot = 0; hotbarSlot < 9; hotbarSlot++) {

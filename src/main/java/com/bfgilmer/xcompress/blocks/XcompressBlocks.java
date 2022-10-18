@@ -82,7 +82,8 @@ public class XcompressBlocks {
 	public static final RegistryObject<BaseBlock> DIRT_4 = register("dirt_4", () -> new DirtBlock(4));
 
 	// dirt stair
-	public static final RegistryObject<DirtStairBlock> DIRTSTAIR_1 = register("dirt_stairs", () -> new DirtStairBlock(1));
+	public static final RegistryObject<DirtStairBlock> DIRTSTAIR_1 = register("dirt_stairs",
+			() -> new DirtStairBlock(1));
 
 	// Stone
 	public static final RegistryObject<BaseBlock> STONE_1 = register("stone_1", () -> new StoneBlock(1));
@@ -97,20 +98,24 @@ public class XcompressBlocks {
 	public static final RegistryObject<BaseBlock> IRON_4 = register("iron_4", () -> new IronBlock(4));
 
 	// Flint
-	public static final RegistryObject<Block> FLINT_1 = register("flint_1", () -> new FlintBlock(1), () -> flint1Renderer());
-	public static final RegistryObject<Block> FLINT_2 = register("flint_2", () -> new FlintBlock(2), () -> flint2Renderer());
-	public static final RegistryObject<Block> FLINT_3 = register("flint_3", () -> new FlintBlock(3), () -> flint3Renderer());
-	public static final RegistryObject<Block> FLINT_4 = register("flint_4", () -> new FlintBlock(4), () -> flint4Renderer());
+	public static final RegistryObject<Block> FLINT_1 = register("flint_1", () -> new FlintBlock(1),
+			() -> flint1Renderer());
+	public static final RegistryObject<Block> FLINT_2 = register("flint_2", () -> new FlintBlock(2),
+			() -> flint2Renderer());
+	public static final RegistryObject<Block> FLINT_3 = register("flint_3", () -> new FlintBlock(3),
+			() -> flint3Renderer());
+	public static final RegistryObject<Block> FLINT_4 = register("flint_4", () -> new FlintBlock(4),
+			() -> flint4Renderer());
 
 	// Slime
 	public static final RegistryObject<Block> SLIME_1 = register("slime_1", () -> new SlimeBlock(1));
 	public static final RegistryObject<Block> SLIME_2 = register("slime_2", () -> new SlimeBlock(2));
 	public static final RegistryObject<Block> SLIME_3 = register("slime_3", () -> new SlimeBlock(3));
 	public static final RegistryObject<Block> SLIME_4 = register("slime_4", () -> new SlimeBlock(4));
-	
+
 	// Glazed Slime
 	public static final RegistryObject<Block> GLAZED_SLIME = register("glazed_slime", () -> new GlazedSlimeBlock());
-	
+
 	// Eggs
 	public static final RegistryObject<Block> EGGS = register("eggs", () -> new EggBlock());
 
@@ -125,8 +130,10 @@ public class XcompressBlocks {
 		return register(name, block, b -> () -> new BaseBlockItem(b.get(), p -> p.tab(Xcompress.ITEM_GROUP)));
 	}
 
-	private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block, Supplier<Callable<ItemStackTileEntityRenderer>> renderMethod) {
-		return register(name, block, b -> () -> new BaseBlockItem(b.get(), p -> p.tab(Xcompress.ITEM_GROUP).setISTER(renderMethod)));
+	private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block,
+			Supplier<Callable<ItemStackTileEntityRenderer>> renderMethod) {
+		return register(name, block,
+				b -> () -> new BaseBlockItem(b.get(), p -> p.tab(Xcompress.ITEM_GROUP).setISTER(renderMethod)));
 	}
 
 	private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block,
@@ -143,21 +150,24 @@ public class XcompressBlocks {
 		BLOCK_ENTRIES.add(() -> block.get().setRegistryName(loc));
 		return RegistryObject.of(loc, ForgeRegistries.BLOCKS);
 	}
+
+	@OnlyIn(Dist.CLIENT)
+	private static Callable<ItemStackTileEntityRenderer> flint1Renderer() {
+		return () -> new XcompressItemStackRenderer<Flint1TileEntity>(Flint1TileEntity::new);
+	}
 	
-	  @OnlyIn(Dist.CLIENT)
-	  private static Callable<ItemStackTileEntityRenderer> flint1Renderer() {
-	    return () -> new XcompressItemStackRenderer<Flint1TileEntity>(Flint1TileEntity::new);
-	  }
-	  private static Callable<ItemStackTileEntityRenderer> flint2Renderer() {
-		    return () -> new XcompressItemStackRenderer<Flint2TileEntity>(Flint2TileEntity::new);
-		  }
-	  private static Callable<ItemStackTileEntityRenderer> flint3Renderer() {
-		    return () -> new XcompressItemStackRenderer<Flint3TileEntity>(Flint3TileEntity::new);
-		  }
-	  private static Callable<ItemStackTileEntityRenderer> flint4Renderer() {
-		    return () -> new XcompressItemStackRenderer<Flint4TileEntity>(Flint4TileEntity::new);
-		  }
+	@OnlyIn(Dist.CLIENT)
+	private static Callable<ItemStackTileEntityRenderer> flint2Renderer() {
+		return () -> new XcompressItemStackRenderer<Flint2TileEntity>(Flint2TileEntity::new);
+	}
 
+	@OnlyIn(Dist.CLIENT)
+	private static Callable<ItemStackTileEntityRenderer> flint3Renderer() {
+		return () -> new XcompressItemStackRenderer<Flint3TileEntity>(Flint3TileEntity::new);
+	}
 
-
+	@OnlyIn(Dist.CLIENT)
+	private static Callable<ItemStackTileEntityRenderer> flint4Renderer() {
+		return () -> new XcompressItemStackRenderer<Flint4TileEntity>(Flint4TileEntity::new);
+	}
 }

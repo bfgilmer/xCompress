@@ -30,10 +30,10 @@ public class XcompressScreen extends ContainerScreen<FlintContainer> implements 
     this.textureXSize = container.getHopperType().textureXSize;
     this.textureYSize = container.getHopperType().textureYSize;
 
-    this.titleLabelX = 48;
-    this.titleLabelY = 4 + (166 - this.textureYSize)/2;
-    this.inventoryLabelX = 48;
-    this.inventoryLabelY = 40 + (166 - this.textureYSize)/2;
+    this.titleLabelX = 50;
+    this.titleLabelY = 8 + (166 - this.textureYSize)/2;
+    this.inventoryLabelX = 61;
+    this.inventoryLabelY = 42 + (166 - this.textureYSize)/2;
     
     this.passEvents = false;
   }
