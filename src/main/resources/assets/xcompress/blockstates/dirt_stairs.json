@@ -1,8 +1,209 @@
 {
   "variants": {
-        "facing=north": { "model": "xcompress:block/dirt_stairs" },
-        "facing=east": { "model": "xcompress:block/dirt_stairs", "y": 90 },
-        "facing=south": { "model": "xcompress:block/dirt_stairs", "y": 180 },
-        "facing=west": { "model": "xcompress:block/dirt_stairs", "y": 270 }
+    "facing=east,half=bottom,shape=inner_left": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=east,half=bottom,shape=inner_right": {
+      "model": "xcompress:block/dirt/stairs_inner"
+    },
+    "facing=east,half=bottom,shape=outer_left": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=east,half=bottom,shape=outer_right": {
+      "model": "xcompress:block/dirt/stairs_outer"
+    },
+    "facing=east,half=bottom,shape=straight": {
+      "model": "xcompress:block/dirt/stairs"
+    },
+    "facing=east,half=top,shape=inner_left": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=inner_right": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=outer_left": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=outer_right": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=east,half=top,shape=straight": {
+      "model": "xcompress:block/dirt/stairs",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=inner_left": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=inner_right": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=outer_left": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=outer_right": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=north,half=bottom,shape=straight": {
+      "model": "xcompress:block/dirt/stairs",
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=inner_left": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=inner_right": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=outer_left": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=outer_right": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "x": 180,
+      "uvlock": true
+    },
+    "facing=north,half=top,shape=straight": {
+      "model": "xcompress:block/dirt/stairs",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=inner_left": {
+      "model": "xcompress:block/dirt/stairs_inner"
+    },
+    "facing=south,half=bottom,shape=inner_right": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=outer_left": {
+      "model": "xcompress:block/dirt/stairs_outer"
+    },
+    "facing=south,half=bottom,shape=outer_right": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=south,half=bottom,shape=straight": {
+      "model": "xcompress:block/dirt/stairs",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=inner_left": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=inner_right": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=outer_left": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=outer_right": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=south,half=top,shape=straight": {
+      "model": "xcompress:block/dirt/stairs",
+      "x": 180,
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=inner_left": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=inner_right": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=outer_left": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "y": 90,
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=outer_right": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west,half=bottom,shape=straight": {
+      "model": "xcompress:block/dirt/stairs",
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=inner_left": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=inner_right": {
+      "model": "xcompress:block/dirt/stairs_inner",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=outer_left": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=outer_right": {
+      "model": "xcompress:block/dirt/stairs_outer",
+      "x": 180,
+      "y": 270,
+      "uvlock": true
+    },
+    "facing=west,half=top,shape=straight": {
+      "model": "xcompress:block/dirt/stairs",
+      "x": 180,
+      "y": 180,
+      "uvlock": true
+    }
   }
 }
