@@ -27,11 +27,11 @@ public class XcompressTileEntities {
 	public static final RegistryObject<TileEntityType<Flint1TileEntity>> FLINT1 = register("flint1_vac",
 			Flint1TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_1.get() });
 	public static final RegistryObject<TileEntityType<Flint2TileEntity>> FLINT2 = register("flint2_vac",
-			Flint1TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_2.get() });
+			Flint2TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_2.get() });
 	public static final RegistryObject<TileEntityType<Flint3TileEntity>> FLINT3 = register("flint3_vac",
-			Flint1TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_3.get() });
+			Flint3TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_3.get() });
 	public static final RegistryObject<TileEntityType<Flint4TileEntity>> FLINT4 = register("flint4_vac",
-			Flint1TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_4.get() });
+			Flint4TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_4.get() });
 
 	@SubscribeEvent
 	public void onRegisterTypes(RegistryEvent.Register<TileEntityType<?>> event) {

@@ -11,7 +11,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class XcompressScreen extends ContainerScreen<FlintContainer> implements IHasContainer<FlintContainer> { 
+public class FlintContainerScreen extends ContainerScreen<FlintContainer> implements IHasContainer<FlintContainer> { 
 
   private final FlintTypes hopperType;
 
@@ -21,7 +21,7 @@ public class XcompressScreen extends ContainerScreen<FlintContainer> implements 
   private int xSize;
   private int ySize;
 
-  public XcompressScreen(FlintContainer container, PlayerInventory playerInventory, ITextComponent title) {
+  public FlintContainerScreen(FlintContainer container, PlayerInventory playerInventory, ITextComponent title) {
     super(container, playerInventory, title);
 
     this.hopperType = container.getHopperType();
