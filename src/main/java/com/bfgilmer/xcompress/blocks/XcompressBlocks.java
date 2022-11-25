@@ -7,14 +7,19 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import com.bfgilmer.xcompress.Xcompress;
+import com.bfgilmer.xcompress.blocks.machine.MachineFrameBlock;
 import com.bfgilmer.xcompress.client.model.inventory.XcompressItemStackRenderer;
 import com.bfgilmer.xcompress.item.BaseBlockItem;
 import com.bfgilmer.xcompress.item.XcompressItems;
+import com.bfgilmer.xcompress.tileentity.CompactorMachineTileEntity;
 import com.bfgilmer.xcompress.tileentity.Flint1TileEntity;
 import com.bfgilmer.xcompress.tileentity.Flint2TileEntity;
 import com.bfgilmer.xcompress.tileentity.Flint3TileEntity;
 import com.bfgilmer.xcompress.tileentity.Flint4TileEntity;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.AbstractBlock.Properties;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.tileentity.ItemStackTileEntityRenderer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.util.ResourceLocation;
@@ -119,6 +124,15 @@ public class XcompressBlocks {
 	// Eggs
 	public static final RegistryObject<Block> EGGS = register("eggs", () -> new EggBlock());
 
+	// Machine
+	public static final RegistryObject<Block> COMPACTOR = register("compactor", () -> new CompactorMachineBlock()); 
+	public static final RegistryObject<Block> MACHINE_FRAME = register("machine_frame", () -> new MachineFrameBlock());
+	
+	// Zinc
+	public static final RegistryObject<Block> ZINC = register("zinc_block", () -> new Block(Properties.of(Material.CLAY).sound(SoundType.STONE).strength(0.6f, 0.6f)));
+	public static final RegistryObject<Block> ALUMINUM = register("aluminum_block", () -> new Block(Properties.of(Material.CLAY).sound(SoundType.STONE).strength(0.6f, 0.6f)));
+	
+	
 	@SubscribeEvent
 	public void onRegisterBlocks(RegistryEvent.Register<Block> event) {
 		IForgeRegistry<Block> registry = event.getRegistry();
@@ -149,6 +163,11 @@ public class XcompressBlocks {
 		ResourceLocation loc = new ResourceLocation(Xcompress.MOD_ID, name);
 		BLOCK_ENTRIES.add(() -> block.get().setRegistryName(loc));
 		return RegistryObject.of(loc, ForgeRegistries.BLOCKS);
+	}
+	
+	@OnlyIn(Dist.CLIENT)
+	private static Callable<ItemStackTileEntityRenderer> CompactorMachineRenderer() {
+		return () -> new XcompressItemStackRenderer<CompactorMachineTileEntity>(CompactorMachineTileEntity::new);
 	}
 
 	@OnlyIn(Dist.CLIENT)

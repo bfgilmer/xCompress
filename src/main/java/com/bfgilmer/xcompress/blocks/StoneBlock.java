@@ -46,12 +46,12 @@ public class StoneBlock extends BaseBlock {
 			ISelectionContext p_220071_4_) {
 		return COLLISION_SHAPE;
 	}
-
+/*
 	public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_,
 			ISelectionContext p_220053_4_) {
 		return OUTLINE_SHAPE;
 	}
-
+*/
 	public void entityInside(BlockState p_196262_1_, World p_196262_2_, BlockPos p_196262_3_, Entity entityIn) {
 		if (entityIn instanceof MonsterEntity) {
 			entityIn.hurt(STONE_DAMAGE, this.damageInflicted);

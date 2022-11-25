@@ -26,4 +26,5 @@ public class FlintBlock extends FlintHopperBlock {
 		}
 		super.stepOn(worldIn, pos, entityIn);
 	}
+
 }

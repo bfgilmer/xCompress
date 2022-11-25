@@ -38,5 +38,8 @@ public class XcompressItems {
 //    public static Item COMPRESSOR;
 	public static final RegistryObject<CompressorItem> COMPRESSOR = register("compressor",
 			() -> new CompressorItem(p -> p.tab(Xcompress.ITEM_GROUP)));
-
+	public static final RegistryObject<CompressorItem> ZINC_INGOT = register("zinc_ingot",
+			() -> new Item(new Item.Properties().tab(Xcompress.ITEM_GROUP)));
+	public static final RegistryObject<CompressorItem> AL_INGOT = register("aluminum_ingot",
+			() -> new Item(new Item.Properties().tab(Xcompress.ITEM_GROUP)));
 }

@@ -32,6 +32,12 @@ public class XcompressTileEntities {
 			Flint3TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_3.get() });
 	public static final RegistryObject<TileEntityType<Flint4TileEntity>> FLINT4 = register("flint4_vac",
 			Flint4TileEntity::new, () -> new Block[] { XcompressBlocks.FLINT_4.get() });
+	
+	public static final RegistryObject<TileEntityType<CompactorMachineTileEntity>> COMPACTOR = register("compactor",
+			CompactorMachineTileEntity::new, () -> new Block[] { XcompressBlocks.COMPACTOR.get() });
+
+	public static final RegistryObject<TileEntityType<MachineFrameTileEntity>> MACHINE_FRAME = register("machine_frame",
+			MachineFrameTileEntity::new, () -> new Block[] { XcompressBlocks.MACHINE_FRAME.get() });
 
 	@SubscribeEvent
 	public void onRegisterTypes(RegistryEvent.Register<TileEntityType<?>> event) {

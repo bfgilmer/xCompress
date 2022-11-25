@@ -29,8 +29,8 @@ public class HopperBridgeCode {
 	 *         False if we moved no items
 	 */
 	@Nullable
-	public static Boolean extractHook(IHopper dest) {
-		return getItemHandler(dest, Direction.UP).map(itemHandlerResult -> {
+	public static Boolean extractHook(IHopper dest, Direction pointing) {
+		return getItemHandler(dest, pointing).map(itemHandlerResult -> {
 			IItemHandler handler = itemHandlerResult.getKey();
 
 			for (int i = 0; i < handler.getSlots(); i++) {
@@ -60,6 +60,11 @@ public class HopperBridgeCode {
 		}).orElse(null); // TODO bad null
 	}
 
+@Nullable
+	public static Boolean extractHook(IHopper dest) {
+		return extractHook(dest, Direction.UP);
+	}
+	
 	/**
 	 * Copied from BlockDropper#dispense and added capability support
 	 */

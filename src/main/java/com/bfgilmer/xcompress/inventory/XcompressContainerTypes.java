@@ -15,4 +15,6 @@ public class XcompressContainerTypes  {
 	  public static final RegistryObject<ContainerType<FlintContainer>> FLINT_CONTAINER_3 = CONTAINERS.register("flint_container_3", () -> new ContainerType<>(FlintContainer::createFlintIronContainer));
 	  public static final RegistryObject<ContainerType<FlintContainer>> FLINT_CONTAINER_4 = CONTAINERS.register("flint_container_4", () -> new ContainerType<>(FlintContainer::createFlintDiamondContainer));
 
+	  public static final RegistryObject<ContainerType<CompactorMachineContainer>> COMPACTOR_CONTAINER = CONTAINERS.register("compactor_container", () -> new ContainerType<>(CompactorMachineContainer::createContainer));
+	  public static final RegistryObject<ContainerType<MachineFrameContainer>> MACHINE_FRAME = CONTAINERS.register("machineframe_container", () -> new ContainerType<>(MachineFrameContainer::createContainer));
 	}

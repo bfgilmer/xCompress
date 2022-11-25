@@ -4,7 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.bfgilmer.xcompress.blocks.XcompressBlocks;
+import com.bfgilmer.xcompress.client.screen.CompactorMachineScreen;
 import com.bfgilmer.xcompress.client.screen.FlintContainerScreen;
+import com.bfgilmer.xcompress.client.screen.MachineFrameScreen;
 import com.bfgilmer.xcompress.inventory.XcompressContainerTypes;
 import com.bfgilmer.xcompress.item.XcompressItems;
 import com.bfgilmer.xcompress.particles.XcompressParticle;
@@ -64,6 +66,9 @@ public class Xcompress {
 	    ScreenManager.register(XcompressContainerTypes.FLINT_CONTAINER_3.get(), FlintContainerScreen::new);
 	    ScreenManager.register(XcompressContainerTypes.FLINT_CONTAINER_4.get(), FlintContainerScreen::new);
 
+	    ScreenManager.register(XcompressContainerTypes.COMPACTOR_CONTAINER.get(), CompactorMachineScreen::new);
+	    ScreenManager.register(XcompressContainerTypes.MACHINE_FRAME.get(), MachineFrameScreen::new);
+	    
 		RenderTypeLookup.setRenderLayer(XcompressBlocks.SOULSAND_1.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(XcompressBlocks.SOULSAND_2.get(), RenderType.cutout());
 		RenderTypeLookup.setRenderLayer(XcompressBlocks.SOULSAND_3.get(), RenderType.cutout());

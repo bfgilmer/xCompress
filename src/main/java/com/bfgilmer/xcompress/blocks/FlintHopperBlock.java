@@ -26,6 +26,11 @@ import net.minecraftforge.common.extensions.IForgeBlock;
 
 
 public class FlintHopperBlock extends ContainerBlock implements IForgeBlock {
+	@Override
+	public boolean canHarvestBlock(BlockState state, IBlockReader world, BlockPos pos, PlayerEntity player) {
+		return true;
+	}
+
 	private final int level;
 	private final FlintTypes hopperType;
 	

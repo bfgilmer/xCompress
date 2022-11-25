@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "xcompress:block/machine_frame" }
+  }
+}
