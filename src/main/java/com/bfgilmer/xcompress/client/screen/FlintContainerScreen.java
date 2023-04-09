@@ -2,16 +2,17 @@ package com.bfgilmer.xcompress.client.screen;
 
 import com.bfgilmer.xcompress.inventory.FlintContainer;
 import com.bfgilmer.xcompress.inventory.FlintTypes;
-import com.mojang.blaze3d.matrix.MatrixStack;
-import net.minecraft.client.gui.IHasContainer;
-import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.util.text.ITextComponent;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class FlintContainerScreen extends ContainerScreen<FlintContainer> implements IHasContainer<FlintContainer> { 
+public class FlintContainerScreen extends AbstractContainerScreen<FlintContainer> { 
 
   private final FlintTypes hopperType;
 
@@ -21,7 +22,7 @@ public class FlintContainerScreen extends ContainerScreen<FlintContainer> implem
   private int xSize;
   private int ySize;
 
-  public FlintContainerScreen(FlintContainer container, PlayerInventory playerInventory, ITextComponent title) {
+  public FlintContainerScreen(FlintContainer container, Inventory playerInventory, Component title) {
     super(container, playerInventory, title);
 
     this.hopperType = container.getHopperType();
@@ -39,7 +40,7 @@ public class FlintContainerScreen extends ContainerScreen<FlintContainer> implem
   }
 
   @Override
-  public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+  public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
     this.renderBackground(matrixStack);
     super.render(matrixStack, mouseX, mouseY, partialTicks);
     this.renderTooltip(matrixStack, mouseX, mouseY);
@@ -47,16 +48,14 @@ public class FlintContainerScreen extends ContainerScreen<FlintContainer> implem
 
 
 @Override
-protected void renderBg(MatrixStack matrixStack, float partialTicks, int mouseX, int mouseY) {
-//	   RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-
-	    this.minecraft.getTextureManager().bind(this.hopperType.getGuiTexture());
+protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+        RenderSystem.setShaderTexture(0, this.hopperType.getGuiTexture());
 
 	    int x = (this.width - this.textureXSize) / 2;
 	    int y = (this.height - this.textureYSize) / 2;
 
 	    blit(matrixStack, x, y, 0, 0, this.xSize, this.ySize, this.textureXSize, this.textureYSize);
   }
-	
+
 }
 

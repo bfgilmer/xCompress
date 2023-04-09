@@ -1,45 +1,28 @@
 package com.bfgilmer.xcompress.item;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
+import static com.bfgilmer.xcompress.Xcompress.MODID;
 
 import com.bfgilmer.xcompress.Xcompress;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.common.Mod;
+
+import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.RegistryObject;
 
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class XcompressItems {
-	public static final List<Supplier<? extends Item>> BLOCK_ENTRIES = new ArrayList<>();
-	public static final List<Supplier<? extends Item>> ITEM_ENTRIES = new ArrayList<>();
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
 
-	@SubscribeEvent
-	public void onRegisterItems(RegistryEvent.Register<Item> event) {
-		IForgeRegistry<Item> registry = event.getRegistry();
-
-		BLOCK_ENTRIES.stream().map(Supplier::get).forEach(registry::register);
-		ITEM_ENTRIES.stream().map(Supplier::get).forEach(registry::register);
-	}
-
-	private static <T extends Item> RegistryObject<T> register(String name, Supplier<? extends Item> item) {
-		ResourceLocation loc = new ResourceLocation(Xcompress.MOD_ID, name);
-		ITEM_ENTRIES.add(() -> item.get().setRegistryName(loc));
-
-		return RegistryObject.of(loc, ForgeRegistries.ITEMS);
-	}
-
-//    @ObjectHolder("compressium:compressor")
-//    public static Item COMPRESSOR;
-	public static final RegistryObject<CompressorItem> COMPRESSOR = register("compressor",
+    public static void init() {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        ITEMS.register(bus);
+    }
+    
+	public static final RegistryObject<CompressorItem> COMPRESSOR = ITEMS.register("compressor",
 			() -> new CompressorItem(p -> p.tab(Xcompress.ITEM_GROUP)));
-	public static final RegistryObject<CompressorItem> ZINC_INGOT = register("zinc_ingot",
+	public static final RegistryObject<Item> ZINC_INGOT = ITEMS.register("zinc_ingot",
 			() -> new Item(new Item.Properties().tab(Xcompress.ITEM_GROUP)));
-	public static final RegistryObject<CompressorItem> AL_INGOT = register("aluminum_ingot",
+	public static final RegistryObject<Item> AL_INGOT = ITEMS.register("aluminum_ingot",
 			() -> new Item(new Item.Properties().tab(Xcompress.ITEM_GROUP)));
 }

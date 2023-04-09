@@ -5,8 +5,8 @@ package com.bfgilmer.xcompress.item;
 
 import java.util.function.Function;
 
-import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.block.Block;
 
 /**
  * @author bfgil

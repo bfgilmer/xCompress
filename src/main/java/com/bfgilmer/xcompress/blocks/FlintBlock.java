@@ -1,12 +1,13 @@
 package com.bfgilmer.xcompress.blocks;
 
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.monster.MonsterEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
 
 public class FlintBlock extends FlintHopperBlock {
 	public static final DamageSource FLINT_DAMAGE = new DamageSource("Compressium");
@@ -20,11 +21,10 @@ public class FlintBlock extends FlintHopperBlock {
 	}
 
 	@Override
-	public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
-		if (entityIn instanceof MonsterEntity) {
+   public void stepOn(Level worldIn, BlockPos pos, BlockState blockState, Entity entityIn) {
+		if (entityIn instanceof Monster) {
 			entityIn.hurt(FLINT_DAMAGE, this.damageInflicted);
 		}
-		super.stepOn(worldIn, pos, entityIn);
-	}
-
+		super.stepOn(worldIn, pos, blockState, entityIn);
+   }
 }

@@ -1,8 +1,8 @@
 package com.bfgilmer.xcompress.blocks;
 
-import net.minecraft.block.SoulSandBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.SoulSandBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 
 public class SoulsandBlock extends SoulSandBlock {
 	public SoulsandBlock(Integer number) {

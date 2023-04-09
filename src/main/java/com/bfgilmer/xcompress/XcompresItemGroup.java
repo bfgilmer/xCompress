@@ -2,13 +2,13 @@ package com.bfgilmer.xcompress;
 
 import com.bfgilmer.xcompress.blocks.XcompressBlocks;
 
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 
-public class XcompresItemGroup extends ItemGroup {
+public class XcompresItemGroup extends CreativeModeTab {
 
 	public XcompresItemGroup() {
-		this(Xcompress.MOD_ID);
+		this(Xcompress.MODID);
 	}
 
 	public XcompresItemGroup(String label) {

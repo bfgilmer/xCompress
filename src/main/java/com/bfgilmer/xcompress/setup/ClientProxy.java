@@ -1,8 +1,8 @@
 package com.bfgilmer.xcompress.setup;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 
 public class ClientProxy implements IProxy {
 
@@ -13,12 +13,12 @@ public class ClientProxy implements IProxy {
 
 	@SuppressWarnings("resource")
 	@Override
-	public World getClientWorld() {
+	public Level getClientWorld() {
 		return Minecraft.getInstance().level;
 	}
 
 	@Override
-	public PlayerEntity getClientPlayer() {
+	public Player getClientPlayer() {
 		return null;
 	}
 }

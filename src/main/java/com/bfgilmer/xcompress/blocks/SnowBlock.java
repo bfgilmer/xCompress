@@ -1,12 +1,20 @@
 package com.bfgilmer.xcompress.blocks;
 
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import java.util.function.Function;
 
-public class SnowBlock extends BaseBlock {
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
+
+public class SnowBlock extends Block {
 	public SnowBlock(Integer number) {
-		super(Material.SNOW,
+		this(Material.SNOW,
 				p -> p.sound(SoundType.SNOW).strength(0.2f * number.floatValue(), (0.2f * number.floatValue()))
 						.friction(0.6f * number.floatValue()).speedFactor(number.floatValue()));
 	}
+	
+	public SnowBlock(Material material, Function<Properties, Properties> properties) {
+		super(properties.apply(Properties.of(material)));
+	}
+
 }

@@ -2,7 +2,7 @@ package com.bfgilmer.xcompress.item;
 
 import java.util.function.Function;
 
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 
 public class BaseItem extends Item {
 	public BaseItem(Function<Properties, Properties> properties) {

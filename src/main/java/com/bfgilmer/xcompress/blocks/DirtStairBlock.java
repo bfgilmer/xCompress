@@ -1,16 +1,15 @@
 package com.bfgilmer.xcompress.blocks;
 
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.StairsBlock;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.material.MaterialColor;
-import net.minecraft.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.Blocks;
 
-public class DirtStairBlock extends StairsBlock {
+public class DirtStairBlock extends StairBlock {
 	private static final java.util.function.Supplier<BlockState> stateSupplier =  ()->Blocks.DIRT.defaultBlockState();
-	private static final Properties properties = AbstractBlock.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL);
+	private static final Properties properties = Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL);
 
 	public DirtStairBlock(Integer number) {
 		super(stateSupplier, properties);

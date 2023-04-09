@@ -2,7 +2,7 @@ package com.bfgilmer.xcompress.item;
 
 import java.util.function.Function;
 
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 
 public class CompressorItem extends BaseItem {
 	private final boolean damage;

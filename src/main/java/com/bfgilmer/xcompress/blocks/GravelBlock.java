@@ -1,8 +1,8 @@
 package com.bfgilmer.xcompress.blocks;
 
-import net.minecraft.block.FallingBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
+import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 
 public class GravelBlock extends FallingBlock {
 	public GravelBlock(Integer number) {

@@ -1,9 +1,9 @@
 package com.bfgilmer.xcompress.blocks;
 
-import net.minecraft.block.FallingBlock;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.FallingBlockEntity;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.level.block.FallingBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.material.Material;
 
 public class SandBlock extends FallingBlock {
 	public SandBlock(Integer number) {
@@ -13,6 +13,6 @@ public class SandBlock extends FallingBlock {
 
 	@Override
 	protected void falling(FallingBlockEntity fallingEntity) {
-		fallingEntity.setHurtsEntities(true);
+		fallingEntity.setHurtsEntities(0.5F, 10);
 	}
 }

@@ -1,49 +1,46 @@
 package com.bfgilmer.xcompress.blocks;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EntitySpawnPlacementRegistry.PlacementType;
-import net.minecraft.entity.passive.ChickenEntity;
-import net.minecraft.entity.passive.SheepEntity;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
+import java.util.function.Function;
 
-public class NetherrackBlock extends BaseBlock {
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.animal.Chicken;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Material;
+
+public class NetherrackBlock extends Block {
 	public static final DamageSource STONE_DAMAGE = new DamageSource("Compressium");
 	private final float damageInflicted;
 
 	public NetherrackBlock(Integer number) {
-		super(Material.STONE,
-				p -> p.sound(SoundType.STONE).strength(0.4f * number.floatValue(), 0.4f * number.floatValue()));
-		
-		this.damageInflicted = (float) (2.0f * Math.pow(2.0f, number.doubleValue()));
+		this(Material.STONE,
+				p -> p.sound(SoundType.STONE).strength(0.4f * number.floatValue(), 0.4f * number.floatValue()).isValidSpawn(XcompressBlocks::always), number);	
 	}
 	
-	@Override
-	public boolean canCreatureSpawn(BlockState state, IBlockReader world, BlockPos pos, PlacementType type,
-			EntityType<?> entityType) {
-		return true;
+	public NetherrackBlock(Material material, Function<Properties, Properties> properties, Integer number) {
+		super(properties.apply(Properties.of(material)));
+		this.damageInflicted = (float) (2.0f * Math.pow(2.0f, number.doubleValue()));
 	}
 
 	@Override
-	public void stepOn(World worldIn, BlockPos pos, Entity entityIn) {
-		if (entityIn instanceof ChickenEntity)
-			if (!((AgeableEntity) entityIn).isBaby()) {
+	   public void stepOn(Level worldIn, BlockPos pos, BlockState state, Entity entityIn) {
+		if (entityIn instanceof Chicken)
+			if (!((AgeableMob) entityIn).isBaby()) {
 				entityIn.hurt(STONE_DAMAGE, this.damageInflicted);
 				entityIn.setSecondsOnFire(3);
 			}
 		
-		if (entityIn instanceof SheepEntity)
-			if (!((SheepEntity) entityIn).isSheared()) {
-				((SheepEntity) entityIn).shear(SoundCategory.NEUTRAL);
+		if (entityIn instanceof Sheep)
+			if (!((Sheep) entityIn).isSheared()) {
+				((Sheep) entityIn).shear(SoundSource.NEUTRAL);
 			}
-		super.stepOn(worldIn, pos, entityIn);
+		super.stepOn(worldIn, pos, state, entityIn);
 	}
 }

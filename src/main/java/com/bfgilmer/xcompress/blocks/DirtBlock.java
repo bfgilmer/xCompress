@@ -3,61 +3,90 @@ package com.bfgilmer.xcompress.blocks;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.block.BlockState;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.util.Direction;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.FlowersFeature;
-import net.minecraft.world.server.ServerWorld;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
+import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.common.IPlantable;
 
-public class DirtBlock extends BaseBlock implements IGrowable {
+
+public class DirtBlock extends Block implements BonemealableBlock {
 	public DirtBlock(Integer number) {
-		super(Material.DIRT, SoundType.GRASS, 0.5f * number.floatValue(),
+		this(Material.DIRT, SoundType.GRASS, 0.5f * number.floatValue(),
 				0.5f * (float) Math.pow(2.0f, number.doubleValue()));
 	}
 
+	public DirtBlock(Material material, SoundType sound, float hardness, float resistance) {
+		super(Properties.of(material).sound(sound).strength(hardness, resistance));
+	}
+
 	@Override
-	public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction facing,
+	public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing,
 			IPlantable plantable) {
 		return net.minecraftforge.common.PlantType.PLAINS.equals(plantable.getPlantType(world, pos.relative(facing)));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public boolean isValidBonemealTarget(IBlockReader blockReader, BlockPos position, BlockState blockState,
+	public boolean isValidBonemealTarget(BlockGetter blockReader, BlockPos position, BlockState blockState,
 			boolean p_176473_4_) {
-		return blockReader.getBlockState(position.above()).isAir(blockReader, position);
+		return blockReader.getBlockState(position.above()).isAir();
 	}
 
 	@Override
-	public boolean isBonemealSuccess(World p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_,
+	public boolean isBonemealSuccess(Level p_180670_1_, Random p_180670_2_, BlockPos p_180670_3_,
 			BlockState p_180670_4_) {
 		return true;
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes", "deprecation" })
 	@Override
-	public void performBonemeal(ServerWorld world, Random random, BlockPos blockPosition, BlockState blockState) {
-		BlockPos blockAbove = blockPosition.above();
+	  public void performBonemeal(ServerLevel world, Random rando, BlockPos blockPosition, BlockState blockState) {
+	      BlockPos blockpos = blockPosition.above();
+	      BlockState blockstate = Blocks.GRASS.defaultBlockState();
 
-		if (world.getBlockState(blockAbove).isAir()) {
-			BlockState blockstate1;
-			List<ConfiguredFeature<?, ?>> list = world.getBiome(blockAbove).getGenerationSettings().getFlowerFeatures();
-			if (!list.isEmpty()) {
-				ConfiguredFeature<?, ?> configuredfeature = list.get(0);
+	      label46:
+	      for(int i = 0; i < 128; ++i) {
+	         BlockPos blockpos1 = blockpos;
 
-				FlowersFeature flowersfeature = (FlowersFeature) configuredfeature.feature();
-				blockstate1 = flowersfeature.getRandomFlower(random, blockAbove, configuredfeature.config());
-				if (blockstate1.canSurvive(world, blockAbove)) {
-					world.setBlock(blockAbove, blockstate1, 3);
-				}
-			}
-		}
-	}
+	         for(int j = 0; j < i / 16; ++j) {
+	            blockpos1 = blockpos1.offset(rando.nextInt(3) - 1, (rando.nextInt(3) - 1) * rando.nextInt(3) / 2, rando.nextInt(3) - 1);
+	            if (!world.getBlockState(blockpos1.below()).is(this) || world.getBlockState(blockpos1).isCollisionShapeFullBlock(world, blockpos1)) {
+	               continue label46;
+	            }
+	         }
+
+	         BlockState blockstate1 = world.getBlockState(blockpos1);
+	         if (blockstate1.is(blockstate.getBlock()) && rando.nextInt(10) == 0) {
+	            ((BonemealableBlock)blockstate.getBlock()).performBonemeal(world, rando, blockpos1, blockstate1);
+	         }
+
+	         if (blockstate1.isAir()) {
+	            Holder<PlacedFeature> holder;
+	            if (rando.nextInt(8) == 0) {
+	               List<ConfiguredFeature<?, ?>> list = world.getBiome(blockpos1).value().getGenerationSettings().getFlowerFeatures();
+	               if (list.isEmpty()) {
+	                  continue;
+	               }
+
+	               holder = ((RandomPatchConfiguration)list.get(0).config()).feature();
+	            } else {
+	               holder = VegetationPlacements.GRASS_BONEMEAL;
+	            }
+
+	            holder.value().place(world, world.getChunkSource().getGenerator(), rando, blockpos1);
+	         }
+	      }
+
+	   }
 }

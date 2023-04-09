@@ -1,24 +1,17 @@
-package com.bfgilmer.xcompress.blocks;
-
-import static com.bfgilmer.xcompress.Xcompress.MODID;
-
-import java.util.function.Supplier;
-
-import com.bfgilmer.xcompress.Xcompress;
-
+package com.bfgilmer.xcompress.setup;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-
-import com.bfgilmer.xcompress.item.XcompressItems;
-
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
+import net.minecraft.world.level.levelgen.feature.StructureFeature;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -26,15 +19,50 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class XcompressBlocks {
-    private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
-    public static final Item.Properties ITEM_PROPERTIES = new Item.Properties().tab(Xcompress.ITEM_GROUP);
+import static com.bfgilmer.xcompress.Xcompress.MODID;
 
+import java.util.function.Supplier;
+
+import com.bfgilmer.xcompress.Xcompress;
+import com.bfgilmer.xcompress.blocks.ClayBlock;
+import com.bfgilmer.xcompress.blocks.CobblestoneBlock;
+import com.bfgilmer.xcompress.blocks.DirtBlock;
+import com.bfgilmer.xcompress.blocks.DirtStairBlock;
+import com.bfgilmer.xcompress.blocks.EggBlock;
+import com.bfgilmer.xcompress.blocks.FlintBlock;
+import com.bfgilmer.xcompress.blocks.GlazedSlimeBlock;
+import com.bfgilmer.xcompress.blocks.GravelBlock;
+import com.bfgilmer.xcompress.blocks.IronBlock;
+import com.bfgilmer.xcompress.blocks.NetherrackBlock;
+import com.bfgilmer.xcompress.blocks.SandBlock;
+import com.bfgilmer.xcompress.blocks.SlimeBlock;
+import com.bfgilmer.xcompress.blocks.SnowBlock;
+import com.bfgilmer.xcompress.blocks.SoulsandBlock;
+import com.bfgilmer.xcompress.blocks.StoneBlock;
+import com.bfgilmer.xcompress.item.CompressorItem;
+import com.bfgilmer.xcompress.item.XcompressItems;
+
+public class Registration {
+    private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
+    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+
+	private static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, MODID);
+    private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, MODID);
+    private static final DeferredRegister<StructureFeature<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, MODID); 
+    
     public static void init() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(bus);
+        ITEMS.register(bus);
+        
+        CONTAINERS.register(bus);
+        ENTITIES.register(bus);
+        STRUCTURES.register(bus);
     }
     
+    // Some common properties for our blocks and items
+    public static final Item.Properties ITEM_PROPERTIES = new Item.Properties().tab(Xcompress.ITEM_GROUP);
+
 	// Soulsand
 	public static final RegistryObject<Block> SOULSAND_1 = register("soulsand_1", () -> new SoulsandBlock(1));
 	public static final RegistryObject<Block> SOULSAND_2 = register("soulsand_2", () -> new SoulsandBlock(2));
@@ -145,5 +173,18 @@ public class XcompressBlocks {
 
     public static boolean never(BlockState state, BlockGetter reader, BlockPos pos, EntityType<?> entityType) {
         return false;
+    }
+    
+	public static final RegistryObject<CompressorItem> COMPRESSOR = ITEMS.register("compressor",
+			() -> new CompressorItem(p -> p.tab(Xcompress.ITEM_GROUP)));
+	public static final RegistryObject<Item> ZINC_INGOT = ITEMS.register("zinc_ingot",
+			() -> new Item(new Item.Properties().tab(Xcompress.ITEM_GROUP)));
+	public static final RegistryObject<Item> AL_INGOT = ITEMS.register("aluminum_ingot",
+			() -> new Item(new Item.Properties().tab(Xcompress.ITEM_GROUP)));
+	
+    // Convenience function: Take a RegistryObject<Block> and make a corresponding RegistryObject<Item> from it
+    public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block) {
+        return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));
+        
     }
 }

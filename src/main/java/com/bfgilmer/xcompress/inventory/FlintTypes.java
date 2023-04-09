@@ -2,18 +2,17 @@ package com.bfgilmer.xcompress.inventory;
 
 import com.bfgilmer.xcompress.Xcompress;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class FlintTypes implements IStringSerializable { 
+public class FlintTypes { 
 	  private static final FlintTypes FLINT_VAC[] = {
-			  new FlintTypes(5, 1, -16D, -16D, -16D, 16D, 16D, 16D, new ResourceLocation(Xcompress.MOD_ID, "textures/gui/flint_container.png")),       // 0 above (1) 
-			  new FlintTypes(5, 2, -32D, -32D, -32D, 48D, 48D, 48D, new ResourceLocation(Xcompress.MOD_ID, "textures/gui/flint1_container.png")),       // 1 3 x 3 x 3 (27)
-			  new FlintTypes(7, 5, -80D, -48D, -80D, 96D, 64D, 96D, new ResourceLocation(Xcompress.MOD_ID, "textures/gui/flint2_container.png")),       // 6 11 x 11 x 5 (605)
-			  new FlintTypes(9, 8, -128D, -64D, -128D, 144D, 80D, 144D, new ResourceLocation(Xcompress.MOD_ID, "textures/gui/flint3_container.png")),   // 8 17 x 17 x 7 (2023)
-			  new FlintTypes(9, 12, -192D, -80D, -192D, 208D, 96D, 208D, new ResourceLocation(Xcompress.MOD_ID, "textures/gui/flint3_container.png")),  // 12 25 x 25 x 9 (5625) 			  
+			  new FlintTypes(5, 1, -16D, -16D, -16D, 16D, 16D, 16D, new ResourceLocation(Xcompress.MODID, "textures/gui/flint_container.png")),       // 0 above (1) 
+			  new FlintTypes(5, 2, -32D, -32D, -32D, 48D, 48D, 48D, new ResourceLocation(Xcompress.MODID, "textures/gui/flint1_container.png")),       // 1 3 x 3 x 3 (27)
+			  new FlintTypes(7, 5, -80D, -48D, -80D, 96D, 64D, 96D, new ResourceLocation(Xcompress.MODID, "textures/gui/flint2_container.png")),       // 6 11 x 11 x 5 (605)
+			  new FlintTypes(9, 8, -128D, -64D, -128D, 144D, 80D, 144D, new ResourceLocation(Xcompress.MODID, "textures/gui/flint3_container.png")),   // 8 17 x 17 x 7 (2023)
+			  new FlintTypes(9, 12, -192D, -80D, -192D, 208D, 96D, 208D, new ResourceLocation(Xcompress.MODID, "textures/gui/flint3_container.png")),  // 12 25 x 25 x 9 (5625) 			  
 	  };
 	 
 	  public final int xSize=186;
@@ -47,11 +46,10 @@ public class FlintTypes implements IStringSerializable {
 		return FLINT_VAC[level].getCollectionArea();
 	}
 
-	private VoxelShape getCollectionArea() {
+	public VoxelShape getCollectionArea() {
 		return CollectionArea;
 	}
 
-	@Override
 	public String getSerializedName() {
 		return "FlintHopper";
 	}
