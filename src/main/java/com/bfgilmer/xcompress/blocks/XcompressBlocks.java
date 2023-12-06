@@ -129,8 +129,8 @@ public class XcompressBlocks {
 	public static final RegistryObject<Block> MACHINE_FRAME = register("machine_frame", () -> new MachineFrameBlock());
 	
 	// Zinc
-	public static final RegistryObject<Block> ZINC = register("zinc_block", () -> new Block(Properties.of(Material.CLAY).sound(SoundType.STONE).strength(0.6f, 0.6f)));
-	public static final RegistryObject<Block> ALUMINUM = register("aluminum_block", () -> new Block(Properties.of(Material.CLAY).sound(SoundType.STONE).strength(0.6f, 0.6f)));
+	public static final RegistryObject<Block> ZINC = register("zinc", () -> new Block(Properties.of(Material.CLAY).sound(SoundType.STONE).strength(0.6f, 0.6f)));
+	public static final RegistryObject<Block> ALUMINUM = register("aluminum", () -> new Block(Properties.of(Material.CLAY).sound(SoundType.STONE).strength(0.6f, 0.6f)));
 	
 	
 	@SubscribeEvent

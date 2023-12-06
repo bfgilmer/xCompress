@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "xcompress:zinc_block"
+          "name": "xcompress:zinc"
         }
       ],
       "conditions": [

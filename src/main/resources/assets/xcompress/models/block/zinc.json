@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/cube",
+	"textures": {
+		"0": "xcompress:block/zinc",
+		"particle": "xcompress:block/zinc"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [5.68889, 4.74074, 8.77037, 7.52593], "texture": "#0"},
+				"east": {"uv": [5.57037, 7.58519, 8.71111, 10.13333], "texture": "#0"},
+				"south": {"uv": [2.31111, 7.52593, 5.51111, 10.13333], "texture": "#0"},
+				"west": {"uv": [2.31111, 4.85926, 5.62963, 7.52593], "texture": "#0"},
+				"up": {"uv": [8.82963, 4.8, 11.55556, 7.52593], "texture": "#0"},
+				"down": {"uv": [8.82963, 4.8, 11.61481, 7.52593], "texture": "#0"}
+			}
+		}
+	]
+}

@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "/ /",
+        "///",
+        "/ /"
+    ],
+    "key": {
+        "/": {
+            "item": "mekanism:hdpe_stick"
+        }
+    },
+    "result": {
+        "item": "minecraft:ladder",
+        "count": 1
+    },
+    "group": "xcompress"
+}

@@ -61,6 +61,13 @@
   "block.xcompress.slime_3": "Triple-Compressed Block Of Slime (512)",
   "block.xcompress.slime_4": "Quad-Compressed Block Of Slime (4096)",
   
+  "block.xcompress.aluminum":"Aluminum Block",
+  "item.xcompress.aluminum":"Aluminum Ingot",
+  "item.xcompress.aluminum_ingot":"Aluminum Ingot",
+  "block.xcompress.zinc":"Zinc Block",
+  "item.xcompress.zinc":"Zinc Ingot",
+  "item.xcompress.zinc_ingot":"Zinc Ingot",
+  "item.xcompress.compressor":"Compressor",
   "block.xcompress.glazed_slime": "Glaze Slime",
   "container.xcompress.flint_hopper": "Flint Vacuum %1$s",
   "container.xcompress.compactor": "Compactor",

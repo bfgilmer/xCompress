@@ -1,0 +1,9 @@
+{
+    "type": "minecraft:smoking",
+    "ingredient": {
+        "item": "minecraft:gray_wool"
+    },
+    "result": "minecraft:black_wool",
+    "experience": 0.1,
+    "cookingtime": 200
+}
